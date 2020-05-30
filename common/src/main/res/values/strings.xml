@@ -1,0 +1,13 @@
+<resources>
+    <string name="common_app_name">阳阳游戏</string>
+    <string name="common_app_splash_yangyang">阳阳</string>
+    <string name="common_app_splash_game">游戏</string>
+    <string name="common_app_main_today_play_time">每个游戏可以玩%d分钟</string>
+    <string name="common_app_main_goal_zero">0000000</string>
+    <string name="common_app_main_goal_finish">你很棒噢</string>
+    <string name="common_app_setting_title">儿童设置</string>
+    <string name="common_app_setting_des1">每个游戏玩</string>
+    <string name="common_app_setting_des2">分钟, 就要休息</string>
+    <string name="common_app_setting_des3">分钟</string>
+    <string name="common_app_setting_tip">休息时间还没过,先休息一下噢</string>
+</resources>

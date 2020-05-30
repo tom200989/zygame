@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hiber.tools.layout.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_goal_finish"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 背景 -->
+    <ImageView
+        android:id="@+id/iv_goal_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/victor_bg"
+        app:layout_heightPercent="50%h"
+        app:layout_marginTopPercent="20%h"
+        app:layout_widthPercent="84%h"
+        tools:ignore="ContentDescription" />
+
+    <!-- OK -->
+    <Button
+        android:id="@+id/bt_goal_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_goal_bg"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/selector_main_goal_finish"
+        android:gravity="center"
+        android:text="@string/common_app_main_goal_finish"
+        android:textColor="@color/common_colorText"
+        app:layout_heightPercent="6.45%w"
+        app:layout_marginTopPercent="10%h"
+        app:layout_textSizePercent="3.0%h"
+        app:layout_widthPercent="15%w" />
+
+</com.hiber.tools.layout.PercentRelativeLayout>

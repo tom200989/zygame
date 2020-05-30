@@ -1,0 +1,9 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="common_AppTheme" parent="@android:style/Theme.Material.Light.NoActionBar.Fullscreen">
+        <!-- Customize your theme here. -->
+        <item name="android:typeface">monospace</item>
+    </style>
+
+</resources>

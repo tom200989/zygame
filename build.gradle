@@ -1,0 +1,37 @@
+apply from: "config.gradle"
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        //noinspection GradleDependency
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        //noinspection GradleDependency
+        classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-rc3'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        flatDir { // 本步骤核心代码
+            dirs project(':app').file('libs')
+        }
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    }
+
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

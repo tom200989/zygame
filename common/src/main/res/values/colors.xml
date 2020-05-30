@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="common_colorTheme">#EBEBEB</color>
+    <color name="common_colorText">@android:color/holo_orange_dark</color>
+    <color name="common_colorEdit">@android:color/black</color>
+    <color name="common_colorEditHit">@android:color/darker_gray</color>
+    <color name="common_colorWave">#014961</color>
+    <color name="common_colorYugou">#FFFFFF</color>
+</resources>

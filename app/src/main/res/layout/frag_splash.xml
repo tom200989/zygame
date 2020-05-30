@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hiber.tools.layout.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_colorTheme">
+
+    <!-- 阳阳 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/gif_logo"
+        android:text="@string/common_app_splash_yangyang"
+        android:textColor="@color/common_colorText"
+        app:layout_marginEndPercent="3%w"
+        app:layout_textSizePercent="20%h" />
+
+    <!-- 动图 -->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/splash"
+        app:layout_heightPercent="30%w"
+        app:layout_widthPercent="40%w" />
+
+    <!-- 游戏 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/gif_logo"
+        android:text="@string/common_app_splash_game"
+        android:textColor="@color/common_colorText"
+        app:layout_marginStartPercent="3%w"
+        app:layout_textSizePercent="20%h" />
+
+</com.hiber.tools.layout.PercentRelativeLayout>

@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+def info = rootProject.ext.android
+def library = rootProject.ext.dependencies
+def modulelist = rootProject.ext.modulelist // 注: 该变量仅APP module有
+
+android {
+
+    defaultConfig {
+        applicationId "com.zygame.zygame"
+        minSdkVersion info.minSdkVersion
+        compileSdkVersion info.compileSdkVersion
+        targetSdkVersion info.targetSdkVersion
+        versionCode info.versionCode
+        versionName info.versionName
+        multiDexEnabled info.multiDexEnabled
+
+        // 引用so库包
+        ndk{
+            abiFilters "armeabi-v7a",'x86'
+        }
+    }
+
+    // 使用lamda表达式
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // 引用so库包
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+    
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    // 统一基础包(勿删)
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':common')
+    // 必须引用common库
+    api(name: library.hibernate, ext: 'aar')
+    // 架构
+    api(name: library.lint, ext: 'aar')
+    // 检查
+    api(name: library.xutils, ext: 'aar')
+    // 网络基础
+    api library.desigin
+    // 必须引用V4库
+    api library.v4
+    // 必须引用V4库
+    api library.v7
+    // 必须引用V7库
+    api library.multidex
+    // 必须引用multidex 库
+    api library.eventbus
+    // 必须引用eventbus 库
+    api library.recyclerview
+    // 必须引用recyclerview 库
+    api library.butterknife1
+    // 必须引用butterknife库
+    annotationProcessor library.butterknife2
+    // 必须引用butterknife库
+    api library.fastjson
+    // 解析库
+    // 调度--> 新增项目在此处添加
+    if (modulelist.currentModule.equalsIgnoreCase(modulelist.all)
+            | modulelist.currentModule.equalsIgnoreCase(modulelist.fishgame)) {// fishgame
+        api project(':fishgame')
+    }
+    if (modulelist.currentModule.equalsIgnoreCase(modulelist.all)
+            | modulelist.currentModule.equalsIgnoreCase(modulelist.icegame)) {// icegame
+        api project(':icegame')
+    }
+    // --------------- 下方添加你的其他依赖 ---------------
+    api 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+}

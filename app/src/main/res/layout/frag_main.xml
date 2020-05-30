@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hiber.tools.layout.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_colorTheme"
+    tools:ignore="ContentDescription">
+
+    <!-- 退出 -->
+    <ImageView
+        android:id="@+id/iv_main_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/selector_main_close"
+        app:layout_heightPercent="10%h"
+        app:layout_marginPercent="8%h"
+        app:layout_widthPercent="10%h" />
+
+    <!-- 设置 -->
+    <ImageView
+        android:id="@+id/iv_main_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/iv_main_close"
+        android:rotation="45"
+        android:src="@drawable/selector_main_setting"
+        app:layout_heightPercent="10%h"
+        app:layout_marginTopPercent="8%h"
+        app:layout_widthPercent="10%h" />
+
+    <!-- 今天还可以玩n分钟 -->
+    <TextView
+        android:id="@+id/tv_main_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/common_app_main_today_play_time"
+        android:textColor="@color/common_colorText"
+        app:layout_marginTopPercent="8%h"
+        app:layout_textSizePercent="7%h" />
+
+    <!-- 选择 -->
+    <com.hiber.tools.layout.PercentRelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:layout_heightPercent="40%h"
+        app:layout_widthPercent="60%w">
+
+        <!-- 钓鱼 -->
+        <com.hiber.tools.layout.PercentRelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="100%h">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/logo_bear"
+                app:layout_heightPercent="75%h"
+                app:layout_widthPercent="75%h" />
+
+            <ImageView
+                android:id="@+id/iv_main_fish"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:src="@drawable/selector_main_rec" />
+
+        </com.hiber.tools.layout.PercentRelativeLayout>
+
+        <!-- 雪糕 -->
+        <com.hiber.tools.layout.PercentRelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            app:layout_widthPercent="100%h">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/logo_ice"
+                app:layout_heightPercent="75%h"
+                app:layout_widthPercent="75%h" />
+
+            <ImageView
+                android:id="@+id/iv_main_ice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:src="@drawable/selector_main_rec" />
+
+        </com.hiber.tools.layout.PercentRelativeLayout>
+
+    </com.hiber.tools.layout.PercentRelativeLayout>
+
+</com.hiber.tools.layout.PercentRelativeLayout>

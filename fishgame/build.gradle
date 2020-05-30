@@ -1,0 +1,76 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+// 统一
+def info = rootProject.ext.android
+def library = rootProject.ext.dependencies
+
+
+android {
+
+    defaultConfig {
+        minSdkVersion info.minSdkVersion
+        compileSdkVersion info.compileSdkVersion
+        targetSdkVersion info.targetSdkVersion
+        versionCode info.versionCode
+        versionName info.versionName
+        multiDexEnabled info.multiDexEnabled
+    }
+
+    // 统一限定 (必须配置:要求除主工程外, 其他module的命名必须以module开头, 包括activity, string等)
+    resourcePrefix "${project.name}_"
+
+    // 使用lamda表达式
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // 引用so库包
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    // 统一基础包(勿删)
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':common')
+    // 必须引用common库
+    api(name: library.hibernate, ext: 'aar')
+    // 架构
+    api(name: library.lint, ext: 'aar')
+    // 检查
+    api(name: library.xutils, ext: 'aar')
+    // 网络基础
+    api library.desigin
+    // 必须引用V4库
+    api library.v4
+    // 必须引用V4库
+    api library.v7
+    // 必须引用V7库
+    api library.multidex
+    // 必须引用multidex 库
+    api library.eventbus
+    // 必须引用eventbus 库
+    api library.recyclerview
+    // 必须引用recyclerview 库
+    api library.butterknife1
+    // 必须引用butterknife库
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    annotationProcessor library.butterknife2
+    // 必须引用butterknife库
+    api library.fastjson
+    // 解析库
+    // --------------- 下方添加你的其他依赖 ---------------
+    api(name: 'ma_wave', ext: 'aar')
+    api files('libs/nineoldandroid.jar')
+}

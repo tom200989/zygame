@@ -1,0 +1,36 @@
+ext {
+    // 单模块调试
+    modulelist = [
+            currentModule: "all",// 请修改此值为对应的模块名('all'为全部项目编译,'none'为全部项目不编译)
+            all          : "all",// ALL
+            fishgame     : "fishgame",// 钓鱼
+            icegame      : "icegame"// 冰淇淋
+    ]
+
+    // 统一基本版本信息
+    android = [
+            buildToolsVersion: "29.0.3",
+            compileSdkVersion: 29,
+            minSdkVersion    : 21,
+            targetSdkVersion : 29,
+            versionCode      : 1,
+            versionName      : "1.0.0",
+            multiDexEnabled  : true // 该属性必须设置为true
+    ]
+
+    // 统一基础依赖
+    dependencies = [
+            v4          : 'com.android.support:support-v4:28.0.0', // 该依赖必须添加
+            v7          : 'com.android.support:appcompat-v7:28.0.0', // 该依赖必须添加
+            desigin     : 'com.android.support:design:28.0.0', // 该依赖必须添加
+            multidex    : 'com.android.support:multidex:1.0.1', // 该依赖必须添加
+            eventbus    : 'org.greenrobot:eventbus:3.1.1', // 该依赖必须添加
+            recyclerview: 'com.android.support:recyclerview-v7:28.0.0', // 该依赖必须添加
+            butterknife1: 'com.jakewharton:butterknife:9.0.0-rc3', // 反射注解
+            butterknife2: 'com.jakewharton:butterknife-compiler:9.0.0-rc3', // 反射注解
+            hibernate   : 'ma_hiber_8_10', // 架构包 
+            lint        : 'ma_lint6', // 检查包
+            fastjson    : 'com.alibaba:fastjson:1.2.57', // 解析器
+            xutils      : 'ma_xutils',// 网络基础包
+    ]
+}
