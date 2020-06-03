@@ -38,8 +38,8 @@ public class Frag_setting extends RootFrag {
      * 初始化视图
      */
     private void initView() {
-        long playDuration_default = Long.parseLong(ShareUtils.get(RootComponent.SETTING_PLAY_TIME, String.valueOf(RootComponent.SETTING_DEFAULT_PLAY_DURATION)));
-        long restDuration_default = Long.parseLong(ShareUtils.get(RootComponent.SETTING_REST_TIME, String.valueOf(RootComponent.SETTING_DEFAULT_REST_DURATION)));
+        long playDuration_default = ShareUtils.get(RootComponent.SETTING_PLAY_TIME, RootComponent.SETTING_DEFAULT_PLAY_DURATION);
+        long restDuration_default = ShareUtils.get(RootComponent.SETTING_REST_TIME, RootComponent.SETTING_DEFAULT_REST_DURATION);
         edSettingPlay.setText(String.valueOf(playDuration_default / 60 / 1000));
         edSettingRest.setText(String.valueOf(restDuration_default / 60 / 1000));
     }
@@ -58,8 +58,8 @@ public class Frag_setting extends RootFrag {
 
     @Override
     public boolean onBackPresss() {// 记录设置的时间并退出
-        int playDuration = Integer.parseInt(edSettingPlay.getText().toString());// 获取玩耍时长
-        int restDuration = Integer.parseInt(edSettingRest.getText().toString());// 获取休息时长
+        long playDuration = Integer.parseInt(edSettingPlay.getText().toString());// 获取玩耍时长
+        long restDuration = Integer.parseInt(edSettingRest.getText().toString());// 获取休息时长
 
         if (playDuration < RootComponent.SETTING_DEFAULT_PLAY_MIN) {// 最小玩耍时长10分钟(ms)
             playDuration = RootComponent.SETTING_DEFAULT_PLAY_MIN;
@@ -70,8 +70,8 @@ public class Frag_setting extends RootFrag {
             edSettingRest.setText(String.valueOf(restDuration));
         }
         // 设置(ms)
-        ShareUtils.set(RootComponent.SETTING_PLAY_TIME, String.valueOf(playDuration * 60 * 1000));
-        ShareUtils.set(RootComponent.SETTING_REST_TIME, String.valueOf(restDuration * 60 * 1000));
+        ShareUtils.set(RootComponent.SETTING_PLAY_TIME, playDuration * 60L * 1000L);
+        ShareUtils.set(RootComponent.SETTING_REST_TIME, restDuration * 60L * 1000L);
         // 退出
         toFrag(getClass(), Frag_main.class, null, true);
         return true;

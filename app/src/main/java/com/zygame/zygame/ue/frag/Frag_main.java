@@ -64,15 +64,15 @@ public class Frag_main extends RootFrag {
      */
     private void creatSpRestData() {
         // 初始化［玩耍时间］和［休息时间］- 先判断是否为第一次使用 - 是: 存默认值
-        if (ShareUtils.get(RootComponent.SETTING_PLAY_TIME, "-1").equalsIgnoreCase("-1")) {
-            ShareUtils.set(RootComponent.SETTING_PLAY_TIME, String.valueOf(RootComponent.SETTING_DEFAULT_PLAY_DURATION));
+        if (ShareUtils.get(RootComponent.SETTING_PLAY_TIME, -1L) == -1L) {
+            ShareUtils.set(RootComponent.SETTING_PLAY_TIME, RootComponent.SETTING_DEFAULT_PLAY_DURATION);
         }
-        if (ShareUtils.get(RootComponent.SETTING_REST_TIME, "-1").equalsIgnoreCase("-1")) {
-            ShareUtils.set(RootComponent.SETTING_REST_TIME, String.valueOf(RootComponent.SETTING_DEFAULT_REST_DURATION));
+        if (ShareUtils.get(RootComponent.SETTING_REST_TIME, -1L) == -1L) {
+            ShareUtils.set(RootComponent.SETTING_REST_TIME, RootComponent.SETTING_DEFAULT_REST_DURATION);
         }
         // 显示防沉迷可玩时间
-        String playtime_str = ShareUtils.get(RootComponent.SETTING_PLAY_TIME, String.valueOf(RootComponent.SETTING_DEFAULT_PLAY_DURATION));
-        int playtime_min = (int) (Long.parseLong(playtime_str) / 60 / 1000);
+        long playtime_ms = ShareUtils.get(RootComponent.SETTING_PLAY_TIME, RootComponent.SETTING_DEFAULT_PLAY_DURATION);
+        int playtime_min = (int) (playtime_ms / 60 / 1000);
         String playtime_show = String.format(getString(R.string.common_app_main_today_play_time), playtime_min);
         tvMainTitle.setText(playtime_show);
     }

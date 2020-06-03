@@ -1,7 +1,8 @@
 package com.zygame.fishgame.ue.frag;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -20,7 +21,6 @@ import com.zygame.fishgame.R2;
 import com.zygame.fishgame.helper.BearMoveHelper;
 import com.zygame.fishgame.helper.BearShootHelper;
 import com.zygame.fishgame.utils.FishUtils;
-import com.zygame.fishgame.utils.MusicPlayer;
 import com.zygame.fishgame.utils.ThreadPoolFactory;
 import com.zygame.fishgame.utils.ThreadPoolProxy;
 import com.zygame.fishgame.widget.BlowWidget;
@@ -79,8 +79,8 @@ public class Frag_fish extends RootFrag {
     private int curGoal = 0;// 当前分数, 默认从0开始
     private DecimalFormat decimalFormat;// 分数格式化对象
     private TimerHelper goalTimer;
-    private static MusicPlayer bgMusic;// 背景音乐
-    private static MusicPlayer fishMusic;// 小鱼上钩音乐
+    private MediaPlayer bgVoice;
+    private MediaPlayer fishVoice;
 
     @Override
     public int onInflateLayout() {
@@ -108,12 +108,9 @@ public class Frag_fish extends RootFrag {
      */
     private void initAttr() {
         // 把当前时间存入lasttime
-        ShareUtils.set(RootComponent.SETTING_LAST_TIME, String.valueOf(System.currentTimeMillis()));
-        // 播放背景音乐
-        bgMusic = new MusicPlayer();
-        bgMusic.play(activity, R.raw.bg_music, true);
-        // 创建上钩音频
-        fishMusic = new MusicPlayer();
+        ShareUtils.set(RootComponent.SETTING_LAST_TIME, System.currentTimeMillis());
+        // todo 播放背景音乐
+        bgVoice = getBgVoice(true);
         // 设置定时器
         timer_period = 2000;
         // 启动线程池
@@ -167,8 +164,12 @@ public class Frag_fish extends RootFrag {
     @Override
     public boolean onBackPresss() {
         // 停止音乐
-        bgMusic.stop();
-        fishMusic.stop();
+        if (bgVoice != null) {
+            bgVoice.stop();
+        }
+        if (fishVoice != null) {
+            fishVoice.stop();
+        }
         // 结束分数循环
         goalFlag = false;
         // 停止全部线程
@@ -178,12 +179,14 @@ public class Frag_fish extends RootFrag {
         return true;
     }
 
+
+    /* -------------------------------------------- private -------------------------------------------- */
+
     /**
      * 处理鱼钩线程
      *
      * @param isActionDown T: 手指按下 F:手指弹起
      */
-    /* -------------------------------------------- private -------------------------------------------- */
     private void handleThreadState(boolean isActionDown) {
         if (isActionDown) {/* 手指按下 */
             // 检测上一次鱼钩回到顶部的时间 > 500ms
@@ -264,6 +267,41 @@ public class Frag_fish extends RootFrag {
         threadPoolProxy.executeTask(new FishRunable(fish, step));
     }
 
+    /**
+     * 启动背景音频
+     *
+     * @param isDefaultStart 是否默认启动
+     */
+    private MediaPlayer getBgVoice(boolean isDefaultStart) {
+        bgVoice = MediaPlayer.create(activity, R.raw.bg_music);
+        bgVoice.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        bgVoice.setVolume(1, 1);
+        bgVoice.setLooping(true);
+        bgVoice.setOnCompletionListener(mp -> bgVoice = getBgVoice(isDefaultStart));
+        if (isDefaultStart) {
+            bgVoice.start();
+        }
+        return bgVoice;
+    }
+
+    /**
+     * 启动小鱼音频
+     */
+    private MediaPlayer getFishVoice(boolean isDefaultStart) {
+        if (fishVoice == null) {
+            fishVoice = MediaPlayer.create(activity, R.raw.fish_get);
+        }
+
+        fishVoice.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        fishVoice.setVolume(1, 1);
+        fishVoice.setLooping(false);
+        fishVoice.setOnCompletionListener(mp -> fishVoice = getFishVoice(isDefaultStart));
+        if (isDefaultStart) {
+            fishVoice.start();
+        }
+        return fishVoice;
+    }
+
     /* -------------------------------------------- thread -------------------------------------------- */
 
     /**
@@ -285,6 +323,7 @@ public class Frag_fish extends RootFrag {
         @Override
         public void run() {
             while (canLoop) {
+
                 if (!isLockYuGou) {/* 小鱼没有上钩前 - 进行游动 */
                     // 指定游动方向
                     activity.runOnUiThread(() -> {
@@ -311,6 +350,7 @@ public class Frag_fish extends RootFrag {
                     }
 
                 } else {/* 上钩后的移动轨迹 */
+
                     activity.runOnUiThread(() -> {// 开始跟随鱼钩移动
                         // 计算鱼钩中心点
                         int yugou_center_x = (int) (ivMainYugou.getX() + ivMainYugou.getWidth() / 2);
@@ -331,7 +371,8 @@ public class Frag_fish extends RootFrag {
                                 // 显示泡泡效果
                                 bwMainBlow.activite();
                                 // 播放小鱼上钩音乐
-                                fishMusic.play(activity, R.raw.fish_get, false);
+                                fishVoice = getFishVoice(false);
+                                fishVoice.start();
                                 // 计算并动态设置分数 - 由分数线程进行计算
                                 goal_ls.add(fishWidget.getGoal());
                                 // 退出小鱼线程
@@ -458,7 +499,6 @@ public class Frag_fish extends RootFrag {
                     // 取出集合的第一个元素
                     int goal = goal_ls.get(0);
                     if (!isGoalLock) {
-                        Log.i("fish_goal", "fish_goal: " + goal + "; goal_ls_size:" + goal_ls.size());
                         // 上锁
                         isGoalLock = true;
                         // 使用定时器进行动态展示
@@ -477,8 +517,8 @@ public class Frag_fish extends RootFrag {
 
                                             } else {
                                                 // 正常设置分数
-                                                setTvGoal(curGoal++);
-                                                temp++;
+                                                setTvGoal(curGoal += 5);
+                                                temp += 5;
                                             }
                                         });
                                     } else {
@@ -521,8 +561,8 @@ public class Frag_fish extends RootFrag {
         public void run() {
             while (true) {
                 try {
-                    long lasttime = Long.parseLong(ShareUtils.get(RootComponent.SETTING_LAST_TIME, "0"));
-                    long playDuration = Long.parseLong(ShareUtils.get(RootComponent.SETTING_PLAY_TIME, String.valueOf(RootComponent.SETTING_DEFAULT_PLAY_DURATION)));
+                    long lasttime = ShareUtils.get(RootComponent.SETTING_LAST_TIME, 0L);
+                    long playDuration = ShareUtils.get(RootComponent.SETTING_PLAY_TIME, RootComponent.SETTING_DEFAULT_PLAY_DURATION);
                     long deltime = System.currentTimeMillis() - lasttime;// 当前时间 - 进入时间 > 设置的玩耍时间
                     if (deltime >= playDuration) {
                         activity.runOnUiThread(() -> {
@@ -533,7 +573,7 @@ public class Frag_fish extends RootFrag {
                             if (gwMainFinish != null) {
                                 gwMainFinish.setVisibility(View.VISIBLE);
                             }
-                            ShareUtils.set(RootComponent.SETTING_LAST_TIME, String.valueOf(System.currentTimeMillis()));
+                            ShareUtils.set(RootComponent.SETTING_LAST_TIME, System.currentTimeMillis());
                         });
 
                         break;
@@ -545,5 +585,6 @@ public class Frag_fish extends RootFrag {
             }
         }
     }
+
 
 }
