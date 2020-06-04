@@ -51,6 +51,18 @@ public class FishUtils {
         fish_ls.add(R.drawable.fish26);
         fish_ls.add(R.drawable.fish27);
         fish_ls.add(R.drawable.fish28);
+        fish_ls.add(R.drawable.fish28);
+        fish_ls.add(R.drawable.fish29);
+        fish_ls.add(R.drawable.fish30);
+        fish_ls.add(R.drawable.fish31);
+        fish_ls.add(R.drawable.fish32);
+        fish_ls.add(R.drawable.fish33);
+        fish_ls.add(R.drawable.fish34);
+        fish_ls.add(R.drawable.fish35);
+        fish_ls.add(R.drawable.fish36);
+        fish_ls.add(R.drawable.fish37);
+        fish_ls.add(R.drawable.fish38);
+        fish_ls.add(R.drawable.fish39);
         // 转换
         int[] fish_arr = new int[fish_ls.size()];
         for (int i = 0; i < fish_arr.length; i++) {

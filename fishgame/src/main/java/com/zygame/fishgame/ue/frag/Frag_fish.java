@@ -37,6 +37,7 @@ import butterknife.BindView;
  * Created by qianli.ma on 2020/5/6 0006.
  */
 @SuppressLint("ClickableViewAccessibility")
+@SuppressWarnings(value = {"unchecked", "deprecation"})
 public class Frag_fish extends RootFrag {
 
     @BindView(R2.id.rl_sprite_bear)
@@ -109,7 +110,7 @@ public class Frag_fish extends RootFrag {
     private void initAttr() {
         // 把当前时间存入lasttime
         ShareUtils.set(RootComponent.SETTING_LAST_TIME, System.currentTimeMillis());
-        // todo 播放背景音乐
+        // 播放背景音乐
         bgVoice = getBgVoice(true);
         // 设置定时器
         timer_period = 2000;
@@ -165,9 +166,11 @@ public class Frag_fish extends RootFrag {
     public boolean onBackPresss() {
         // 停止音乐
         if (bgVoice != null) {
+            bgVoice.pause();
             bgVoice.stop();
         }
         if (fishVoice != null) {
+            fishVoice.pause();
             fishVoice.stop();
         }
         // 结束分数循环
@@ -179,6 +182,11 @@ public class Frag_fish extends RootFrag {
         return true;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        onBackPressed();
+    }
 
     /* -------------------------------------------- private -------------------------------------------- */
 
