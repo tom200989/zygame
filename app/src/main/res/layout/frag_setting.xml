@@ -59,7 +59,7 @@
             android:textColor="@color/common_colorEdit"
             android:textColorHint="@color/common_colorEditHit"
             app:layout_textSizePercent="75%h"
-            app:layout_widthPercent="10%w" />
+            app:layout_widthPercent="15%w" />
 
         <TextView
             android:layout_width="wrap_content"
