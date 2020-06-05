@@ -75,14 +75,13 @@ public class Frag_main extends RootFrag {
         // 跳转到FISH
         ivMainFish.setOnClickListener(v -> {
             // TODO: 2020/6/5  当时长大于12小时: 每日清零
-            if (PreventHelper.getCurrentTime() - PreventHelper.getLastRecordTime() > 10 * 1000) {
+            if (PreventHelper.getCurrentTime() - PreventHelper.getLastRecordTime() > PREVENT_CLEAR_TIME) {
                 PreventHelper.setTotalDuration(0);
             }
 
             // TODO: 2020/6/5 防沉迷进入判断
             long totalDuration = PreventHelper.getTotalDuration();// 获取一共玩了多久
             long totalPermitPlayDuration = PreventHelper.getTotalPermitDuration();// 获取一共允许玩多久
-
             if (totalDuration >= totalPermitPlayDuration) {// 如果当天超时了 - 提示
                 toast(R.string.common_app_setting_tip2, 6000);
 

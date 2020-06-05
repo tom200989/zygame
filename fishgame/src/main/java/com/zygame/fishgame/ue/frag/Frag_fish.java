@@ -189,10 +189,10 @@ public class Frag_fish extends RootFrag {
 
     @Override
     public boolean onBackPresss() {
-        // TODO: 2020/6/5  防沉迷: 主动退出时 - 把本次时长叠加
-        PreventHelper.setTotalDuration(PreventHelper.getTotalDuration() + (PreventHelper.getCurrentTime() - tempTime));
-        // TODO: 2020/6/5  防沉迷: 设置最后记录时间
-        PreventHelper.setLastRecordTime(PreventHelper.getCurrentTime());
+        // TOAT: 此处不能在保存totalDuration和lastRecordDuration到SP - 否则会与防沉迷子线程产生冲突
+
+        // TOAT: 此处一定要先停止循环再进行tempTime清零
+        restFlag = false;
         // 清零
         tempTime = 0;
         // 停止音乐
@@ -688,6 +688,7 @@ public class Frag_fish extends RootFrag {
                     long curTotalTime = PreventHelper.getTotalDuration() + (PreventHelper.getCurrentTime() - tempTime);
                     // TODO: 2020/6/5 叠加总玩时长
                     PreventHelper.setTotalDuration(curTotalTime);
+                    System.out.println("frag_main: each loop getTotalDuration= " + PreventHelper.getTotalDuration());
                     // TODO: 2020/6/5 设置最后记录时间 
                     PreventHelper.setLastRecordTime(PreventHelper.getCurrentTime());
                     // TODO: 2020/6/5 如果大于总允许时长

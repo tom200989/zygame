@@ -86,7 +86,7 @@ public class PreventHelper {
         if (!json.equalsIgnoreCase(aNull)) {
             return JSONObject.parseObject(json, PreventBean.class).getTotalDuration();
         }
-        return -1L;
+        return -1;
     }
 
     /**
@@ -98,7 +98,7 @@ public class PreventHelper {
         if (!json.equalsIgnoreCase(aNull)) {
             return JSONObject.parseObject(json, PreventBean.class).getTotalDuration_Min();
         }
-        return -1L;
+        return -1;
     }
 
 
@@ -142,7 +142,7 @@ public class PreventHelper {
         if (!json.equalsIgnoreCase(aNull)) {
             return JSONObject.parseObject(json, PreventBean.class).getLastRecordTime();
         }
-        return -1L;
+        return -1;
     }
 
     /* -------------------------------------------- impl 4 total permit play -------------------------------------------- */
@@ -173,7 +173,7 @@ public class PreventHelper {
         if (!json.equalsIgnoreCase(aNull)) {
             return JSONObject.parseObject(json, PreventBean.class).getTotalPermitDuration();
         }
-        return -1L;
+        return -1;
     }
 
     /**
@@ -185,7 +185,7 @@ public class PreventHelper {
         if (!json.equalsIgnoreCase(aNull)) {
             return JSONObject.parseObject(json, PreventBean.class).getTotalPermitDuration_Min();
         }
-        return -1L;
+        return -1;
     }
 
     /**
