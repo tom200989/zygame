@@ -3,7 +3,11 @@ package com.zygame.fishgame.ue.frag;
 import android.annotation.SuppressLint;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,6 +24,7 @@ import com.zygame.fishgame.R;
 import com.zygame.fishgame.R2;
 import com.zygame.fishgame.helper.BearMoveHelper;
 import com.zygame.fishgame.helper.BearShootHelper;
+import com.zygame.fishgame.helper.ParticleHelper;
 import com.zygame.fishgame.utils.FishUtils;
 import com.zygame.fishgame.utils.ThreadPoolFactory;
 import com.zygame.fishgame.utils.ThreadPoolProxy;
@@ -40,6 +45,8 @@ import butterknife.BindView;
 @SuppressWarnings(value = {"unchecked", "deprecation"})
 public class Frag_fish extends RootFrag {
 
+    @BindView(R2.id.rl_main)
+    RelativeLayout rlMain;// 总布局
     @BindView(R2.id.rl_sprite_bear)
     RelativeLayout rlSpriteBear;// 熊二
     @BindView(R2.id.iv_main_yugou)
@@ -58,6 +65,12 @@ public class Frag_fish extends RootFrag {
     TextView tvMainGoal;// 分数
     @BindView(R2.id.rl_main_fishArea)
     RelativeLayout rlMainFishArea;// 捕鱼区
+    @BindView(R2.id.rl_main_change_bg_store)
+    RelativeLayout rlMainChangeBgStore;// 可变背景(衬底)
+    @BindView(R2.id.rl_main_change_bg)
+    RelativeLayout rlMainChangeBg;// 可变背景(前置)
+    @BindView(R2.id.rl_main_leniod)
+    RelativeLayout rlMainLeniod;// 粒子视图
     @BindView(R2.id.gw_main_finish)
     GoalFinishWidget gwMainFinish;// 退出面板
 
@@ -74,11 +87,13 @@ public class Frag_fish extends RootFrag {
     private int yugou_duration = 15;// 鱼钩下掉间隔时长
     private int fish_duration = 15;// 小鱼滑动间隔时长
     private int[] fishRes;// 小鱼资源
+    private int bgCount;// 定时背景计数器(辅助)
     private long topTime;// 鱼钩回到顶部的时间
     private List<Integer> goal_ls = new ArrayList<>();// 分数集合
     private boolean goalFlag = true;// 控制分数线程退出循环的标记
     private boolean restFlag = true;// 防沉迷控制标记
     private int curGoal = 0;// 当前分数, 默认从0开始
+    private int currentLeniodType = ParticleHelper.TYPE_DEFAULT;// 当前默认粒子效果(无效果)
     private DecimalFormat decimalFormat;// 分数格式化对象
     private TimerHelper goalTimer;
     private MediaPlayer bgVoice;
@@ -164,6 +179,14 @@ public class Frag_fish extends RootFrag {
     }
 
     @Override
+    public void setTimerTask() {
+        // 定时每隔2秒生成一条鱼
+        randomCreatFish();
+        // 定时切换背景
+        triggerLeniodAndBg();
+    }
+
+    @Override
     public boolean onBackPresss() {
         // 停止音乐
         stopvoice();
@@ -246,10 +269,89 @@ public class Frag_fish extends RootFrag {
     }
 
 
-    @Override
-    public void setTimerTask() {
-        // 定时每隔2秒生成一条鱼
-        randomCreatFish();
+    /**
+     * 定时切换背景以及切换粒子效果
+     */
+    private void triggerLeniodAndBg() {
+        bgCount += 2;
+        // 每个N秒变换一次
+        if (bgCount % 10 == 0) {
+            if (currentLeniodType == ParticleHelper.TYPE_DEFAULT) {// 如果当前是默认效果 - 则启动［下雨］- 修改标记为［下雨］
+                ParticleHelper.rain(activity, rlMainLeniod, 5, 10000);
+                currentLeniodType = ParticleHelper.TYPE_RAIN;
+
+            } else if (currentLeniodType == ParticleHelper.TYPE_RAIN) {// 如果当前是下雨效果 - 则启动［下雪］- 修改标记为［下雪］
+                ParticleHelper.snow(activity, rlMainLeniod, 5, 10000);
+                currentLeniodType = ParticleHelper.TYPE_SNOW;
+
+
+            } else if (currentLeniodType == ParticleHelper.TYPE_SNOW) {// 如果当前是下雪效果 - 则启动［刮风］- 修改标记为［刮风］
+                ParticleHelper.wind(activity, rlMainLeniod, 80, 10000);
+                currentLeniodType = ParticleHelper.TYPE_WIND;
+
+            } else if (currentLeniodType == ParticleHelper.TYPE_WIND) {// 如果当前是刮风效果 - 则恢复［默认］- 修改标记为［默认］
+                ParticleHelper.particleSystem.stopEmitting();
+                currentLeniodType = ParticleHelper.TYPE_DEFAULT;
+            }
+
+            // 根据最新状态设置背景
+            setChangeBgAnim(currentLeniodType);
+        }
+    }
+
+    /**
+     * 修改可变背景图片
+     *
+     * @param type 当前粒子效果
+     */
+    private void setChangeBgAnim(int type) {
+        // 设置背景
+        if (type == ParticleHelper.TYPE_RAIN) {
+            rlMainChangeBg.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_rain));
+        } else if (type == ParticleHelper.TYPE_SNOW) {
+            rlMainChangeBg.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_winter));
+        } else if (type == ParticleHelper.TYPE_WIND) {
+            rlMainChangeBg.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_autumn));
+        } else if (type == ParticleHelper.TYPE_DEFAULT) {
+            rlMainChangeBgStore.setBackground(null);
+        }
+        // 设置动画
+        AlphaAnimation al = new AlphaAnimation(type == ParticleHelper.TYPE_DEFAULT ? 1 : 0, type == ParticleHelper.TYPE_DEFAULT ? 0 : 1);
+        al.setDuration(3000);
+        al.setFillAfter(true);
+        al.setInterpolator(new LinearInterpolator());
+        al.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                // 如果当前是默认效果 - 隐藏; 反之显示
+                rlMainChangeBg.setVisibility(type == ParticleHelper.TYPE_DEFAULT ? View.INVISIBLE : View.VISIBLE);
+                rlMainChangeBgStore.setVisibility(type == ParticleHelper.TYPE_DEFAULT ? View.INVISIBLE : View.VISIBLE);
+                // 设置衬底背景
+                if (type == ParticleHelper.TYPE_RAIN) {
+                    rlMainChangeBgStore.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_rain));
+                } else if (type == ParticleHelper.TYPE_SNOW) {
+                    rlMainChangeBgStore.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_winter));
+                } else if (type == ParticleHelper.TYPE_WIND) {
+                    rlMainChangeBgStore.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_autumn));
+                } else if (type == ParticleHelper.TYPE_DEFAULT) {
+                    rlMainChangeBgStore.setBackground(null);
+                }
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        // 设置动画
+        rlMainChangeBg.setAnimation(al);
+        al.startNow();
+        rlMainChangeBg.startAnimation(al);
     }
 
     /**
