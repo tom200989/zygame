@@ -26,8 +26,8 @@ public class RootComponent {
     public static String SETTING_REST_TIME = "SETTING_REST_TIME";// 休息时长缓存标记
     public static String SETTING_LAST_TIME = "SETTING_LAST_TIME";// 上次时长缓存标记
 
-    public static long SETTING_DEFAULT_PLAY_MIN = 40L;// 默认玩耍时长:min
-    public static long SETTING_DEFAULT_REST_MIN = 60L;// 默认休息时长:min
+    public static long SETTING_DEFAULT_PLAY_MIN = 1;// 默认玩耍时长:min
+    public static long SETTING_DEFAULT_REST_MIN = 1;// 默认休息时长:min
     public static long SETTING_DEFAULT_PLAY_DURATION = SETTING_DEFAULT_PLAY_MIN * 60L * 1000L;// 默认玩耍时长:ms
     public static long SETTING_DEFAULT_REST_DURATION = SETTING_DEFAULT_REST_MIN * 60L * 1000L;// 默认休息时长:ms
 }

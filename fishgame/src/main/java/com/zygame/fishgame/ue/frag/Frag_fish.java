@@ -77,6 +77,7 @@ public class Frag_fish extends RootFrag {
     private long topTime;// 鱼钩回到顶部的时间
     private List<Integer> goal_ls = new ArrayList<>();// 分数集合
     private boolean goalFlag = true;// 控制分数线程退出循环的标记
+    private boolean restFlag = true;// 防沉迷控制标记
     private int curGoal = 0;// 当前分数, 默认从0开始
     private DecimalFormat decimalFormat;// 分数格式化对象
     private TimerHelper goalTimer;
@@ -156,8 +157,8 @@ public class Frag_fish extends RootFrag {
     public void onNexts(Object o, View view, String s) {
         // 开启定时器
         timerState = TimerState.ON_BUT_OFF_WHEN_HIDE_AND_PAUSE;
-        // 启动防沉迷线程 - todo 暂时取消
-        // threadPoolProxy.executeTask(new RestRunable());
+        // 启动防沉迷线程
+        threadPoolProxy.executeTask(new RestRunable());
         // 开启分数观察线程
         threadPoolProxy.executeTask(new GoalRunnable());
     }
@@ -165,30 +166,36 @@ public class Frag_fish extends RootFrag {
     @Override
     public boolean onBackPresss() {
         // 停止音乐
-        if (bgVoice != null) {
-            bgVoice.pause();
-            bgVoice.stop();
-        }
-        if (fishVoice != null) {
-            fishVoice.pause();
-            fishVoice.stop();
-        }
+        stopvoice();
         // 结束分数循环
         goalFlag = false;
         // 停止全部线程
         threadPoolProxy.shutAll();
-        // 并跳转到主页
+        // 跳转
         toFragModule(getClass(), RootComponent.SPLASH_AC, RootComponent.FRAG_MAIN, null, false, getClass());
+
         return true;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        onBackPressed();
+        onBackPresss();
     }
 
     /* -------------------------------------------- private -------------------------------------------- */
+
+    /**
+     * 停止音乐
+     */
+    private void stopvoice() {
+        if (bgVoice != null) {
+            bgVoice.stop();
+        }
+        if (fishVoice != null) {
+            fishVoice.stop();
+        }
+    }
 
     /**
      * 处理鱼钩线程
@@ -567,20 +574,32 @@ public class Frag_fish extends RootFrag {
 
         @Override
         public void run() {
-            while (true) {
+            while (restFlag) {
                 try {
+                    // 获取上次时间
                     long lasttime = ShareUtils.get(RootComponent.SETTING_LAST_TIME, 0L);
+                    // 如果上次时间为0 - 说明是首次使用 - 把当前时间存入
+                    if (lasttime == 0) {
+                        lasttime = System.currentTimeMillis();
+                        ShareUtils.set(RootComponent.SETTING_LAST_TIME, lasttime);
+                    }
+                    // 获取允许玩耍的时间
                     long playDuration = ShareUtils.get(RootComponent.SETTING_PLAY_TIME, RootComponent.SETTING_DEFAULT_PLAY_DURATION);
-                    long deltime = System.currentTimeMillis() - lasttime;// 当前时间 - 进入时间 > 设置的玩耍时间
+                    // 当前时间 - 上次时间 > 设置的玩耍时间
+                    long deltime = System.currentTimeMillis() - lasttime;
                     if (deltime >= playDuration) {
                         activity.runOnUiThread(() -> {
-                            // 弹出框 并把时间记录
+                            restFlag = false;
+                            // 弹出框
                             if (goalTimer != null) {
                                 goalTimer.stop();
                             }
                             if (gwMainFinish != null) {
                                 gwMainFinish.setVisibility(View.VISIBLE);
                             }
+                            // 停止音乐
+                            stopvoice();
+                            // 并把时间记录
                             ShareUtils.set(RootComponent.SETTING_LAST_TIME, System.currentTimeMillis());
                         });
 
