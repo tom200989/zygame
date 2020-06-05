@@ -2,9 +2,9 @@ package com.zygame.fishgame.ue.activity;
 
 import com.hiber.bean.RootProperty;
 import com.hiber.hiber.RootMAActivity;
+import com.zygame.fishgame.BuildConfig;
 import com.zygame.fishgame.R;
 import com.zygame.fishgame.ue.frag.Frag_fish;
-import com.zygame.fishgame.BuildConfig;
 public class FishActivity extends RootMAActivity {
 
     private Class[] frags = {Frag_fish.class};

@@ -16,10 +16,10 @@ import com.de.wave.core.WaveView;
 import com.hiber.cons.TimerState;
 import com.hiber.hiber.RootFrag;
 import com.hiber.tools.ScreenSize;
-import com.hiber.tools.ShareUtils;
 import com.hiber.tools.TimerHelper;
 import com.nineoldandroids.view.ViewHelper;
 import com.zygame.common.component.RootComponent;
+import com.zygame.common.helper.PreventHelper;
 import com.zygame.fishgame.R;
 import com.zygame.fishgame.R2;
 import com.zygame.fishgame.helper.BearMoveHelper;
@@ -98,6 +98,7 @@ public class Frag_fish extends RootFrag {
     private TimerHelper goalTimer;
     private MediaPlayer bgVoice;
     private MediaPlayer fishVoice;
+    private long tempTime;// 临时计时 - 用于辅助计算单次时长
 
     @Override
     public int onInflateLayout() {
@@ -124,8 +125,8 @@ public class Frag_fish extends RootFrag {
      * 初始化属性
      */
     private void initAttr() {
-        // 把当前时间存入lasttime
-        ShareUtils.set(RootComponent.SETTING_LAST_TIME, System.currentTimeMillis());
+        // todo 防沉迷: 进入游戏 - 记录当前临时时间 - 用于监控单次玩耍时长
+        tempTime = PreventHelper.getCurrentTime();
         // 播放背景音乐
         bgVoice = getBgVoice(true);
         // 设置定时器
@@ -172,7 +173,7 @@ public class Frag_fish extends RootFrag {
     public void onNexts(Object o, View view, String s) {
         // 开启定时器
         timerState = TimerState.ON_BUT_OFF_WHEN_HIDE_AND_PAUSE;
-        // 启动防沉迷线程
+        // todo 启动防沉迷线程
         threadPoolProxy.executeTask(new RestRunable());
         // 开启分数观察线程
         threadPoolProxy.executeTask(new GoalRunnable());
@@ -188,6 +189,12 @@ public class Frag_fish extends RootFrag {
 
     @Override
     public boolean onBackPresss() {
+        // TODO: 2020/6/5  防沉迷: 主动退出时 - 把本次时长叠加
+        PreventHelper.setTotalDuration(PreventHelper.getTotalDuration() + (PreventHelper.getCurrentTime() - tempTime));
+        // TODO: 2020/6/5  防沉迷: 设置最后记录时间
+        PreventHelper.setLastRecordTime(PreventHelper.getCurrentTime());
+        // 清零
+        tempTime = 0;
         // 停止音乐
         stopvoice();
         // 结束分数循环
@@ -196,7 +203,6 @@ public class Frag_fish extends RootFrag {
         threadPoolProxy.shutAll();
         // 跳转
         toFragModule(getClass(), RootComponent.SPLASH_AC, RootComponent.FRAG_MAIN, null, false, getClass());
-
         return true;
     }
 
@@ -275,7 +281,7 @@ public class Frag_fish extends RootFrag {
     private void triggerLeniodAndBg() {
         bgCount += 2;
         // 每个N秒变换一次
-        if (bgCount % 10 == 0) {
+        if (bgCount % 120 == 0) {
             if (currentLeniodType == ParticleHelper.TYPE_DEFAULT) {// 如果当前是默认效果 - 则启动［下雨］- 修改标记为［下雨］
                 ParticleHelper.rain(activity, rlMainLeniod, 5, 10000);
                 currentLeniodType = ParticleHelper.TYPE_RAIN;
@@ -678,18 +684,14 @@ public class Frag_fish extends RootFrag {
         public void run() {
             while (restFlag) {
                 try {
-                    // 获取上次时间
-                    long lasttime = ShareUtils.get(RootComponent.SETTING_LAST_TIME, 0L);
-                    // 如果上次时间为0 - 说明是首次使用 - 把当前时间存入
-                    if (lasttime == 0) {
-                        lasttime = System.currentTimeMillis();
-                        ShareUtils.set(RootComponent.SETTING_LAST_TIME, lasttime);
-                    }
-                    // 获取允许玩耍的时间
-                    long playDuration = ShareUtils.get(RootComponent.SETTING_PLAY_TIME, RootComponent.SETTING_DEFAULT_PLAY_DURATION);
-                    // 当前时间 - 上次时间 > 设置的玩耍时间
-                    long deltime = System.currentTimeMillis() - lasttime;
-                    if (deltime >= playDuration) {
+                    // TODO: 2020/6/5 计算本次时长
+                    long curTotalTime = PreventHelper.getTotalDuration() + (PreventHelper.getCurrentTime() - tempTime);
+                    // TODO: 2020/6/5 叠加总玩时长
+                    PreventHelper.setTotalDuration(curTotalTime);
+                    // TODO: 2020/6/5 设置最后记录时间 
+                    PreventHelper.setLastRecordTime(PreventHelper.getCurrentTime());
+                    // TODO: 2020/6/5 如果大于总允许时长
+                    if (curTotalTime >= PreventHelper.getTotalPermitDuration()) {
                         activity.runOnUiThread(() -> {
                             restFlag = false;
                             // 弹出框
@@ -701,13 +703,13 @@ public class Frag_fish extends RootFrag {
                             }
                             // 停止音乐
                             stopvoice();
-                            // 并把时间记录
-                            ShareUtils.set(RootComponent.SETTING_LAST_TIME, System.currentTimeMillis());
+                            // 清零
+                            tempTime = 0;
                         });
 
                         break;
                     }
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

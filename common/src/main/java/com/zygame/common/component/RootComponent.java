@@ -22,12 +22,8 @@ public class RootComponent {
     public static String FRAG_ICE = "com.zygame.icegame.ue.frag.Frag_ice";
 
     public static String SP_NAME = "ZYApp";// sp文件名
-    public static String SETTING_PLAY_TIME = "SETTING_PLAY_TIME";// 玩耍时长缓存标记
-    public static String SETTING_REST_TIME = "SETTING_REST_TIME";// 休息时长缓存标记
-    public static String SETTING_LAST_TIME = "SETTING_LAST_TIME";// 上次时长缓存标记
+    public static String PREVENTION_TIME = "PREVENTION_TIME";// 防沉迷标记 (Value为json)
+    public static long PREVENT_CLEAR_TIME = 6 * 60 * 60 * 1000;// 防沉迷每日清零时长 (6小时)
+    public static long PREVENT_INIT_TOTAL_PERMIT = 2 * 60 * 60 * 1000;// 防沉迷每日可以玩时长 (2小时)
 
-    public static long SETTING_DEFAULT_PLAY_MIN = 40;// 默认玩耍时长:min
-    public static long SETTING_DEFAULT_REST_MIN = 60;// 默认休息时长:min
-    public static long SETTING_DEFAULT_PLAY_DURATION = SETTING_DEFAULT_PLAY_MIN * 60L * 1000L;// 默认玩耍时长:ms
-    public static long SETTING_DEFAULT_REST_DURATION = SETTING_DEFAULT_REST_MIN * 60L * 1000L;// 默认休息时长:ms
 }

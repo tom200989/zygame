@@ -27,60 +27,39 @@
         app:layout_marginTopPercent="3%w"
         app:layout_textSizePercent="6%h" />
 
-    <!-- 设置 -->
+    <!-- 设置2 -->
     <com.hiber.tools.layout.PercentLinearLayout
+        android:id="@+id/ll_setting_time2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_heightPercent="10%h"
+        app:layout_marginTopPercent="5%h"
         app:layout_widthPercent="80%w">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/common_app_setting_des1"
+            android:text="@string/common_app_setting_des4"
             android:textColor="@color/common_colorText"
             app:layout_textSizePercent="80%h" />
 
         <EditText
-            android:id="@+id/ed_setting_play"
+            android:id="@+id/ed_setting_total_permit_play"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@null"
             android:gravity="center"
             android:hint="30"
             android:inputType="number"
-            android:maxLength="2"
-            android:text="30"
+            android:maxLength="3"
+            android:text="80"
             android:textColor="@color/common_colorEdit"
             android:textColorHint="@color/common_colorEditHit"
             app:layout_textSizePercent="75%h"
             app:layout_widthPercent="10%w" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/common_app_setting_des2"
-            android:textColor="@color/common_colorText"
-            app:layout_textSizePercent="80%h" />
-
-        <EditText
-            android:id="@+id/ed_setting_rest"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:gravity="center"
-            android:hint="60"
-            android:inputType="number"
-            android:maxLength="2"
-            android:text="60"
-            android:textColor="@color/common_colorEdit"
-            android:textColorHint="@color/common_colorEditHit"
-            app:layout_textSizePercent="75%h"
-            app:layout_widthPercent="10%w"
-            tools:ignore="Autofill" />
 
         <TextView
             android:layout_width="wrap_content"

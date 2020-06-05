@@ -5,8 +5,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.hiber.hiber.RootFrag;
-import com.hiber.tools.ShareUtils;
-import com.zygame.common.component.RootComponent;
+import com.zygame.common.helper.PreventHelper;
 import com.zygame.zygame.R;
 
 import butterknife.BindView;
@@ -18,10 +17,8 @@ public class Frag_setting extends RootFrag {
 
     @BindView(R.id.iv_setting_exit)
     ImageView ivSettingExit;// 回退
-    @BindView(R.id.ed_setting_play)
-    EditText edSettingPlay;// 玩耍时长
-    @BindView(R.id.ed_setting_rest)
-    EditText edSettingRest;// 休息时长
+    @BindView(R.id.ed_setting_total_permit_play)
+    EditText edSettingTotalPermitPlay;// 一共玩了的时长
 
     @Override
     public int onInflateLayout() {
@@ -38,10 +35,7 @@ public class Frag_setting extends RootFrag {
      * 初始化视图
      */
     private void initView() {
-        long playDuration_default = ShareUtils.get(RootComponent.SETTING_PLAY_TIME, RootComponent.SETTING_DEFAULT_PLAY_DURATION);
-        long restDuration_default = ShareUtils.get(RootComponent.SETTING_REST_TIME, RootComponent.SETTING_DEFAULT_REST_DURATION);
-        edSettingPlay.setText(String.valueOf(playDuration_default / 60 / 1000));
-        edSettingRest.setText(String.valueOf(restDuration_default / 60 / 1000));
+        edSettingTotalPermitPlay.setText(PreventHelper.getTotalPermitDuration_Min_Str());
     }
 
     /**
@@ -58,20 +52,9 @@ public class Frag_setting extends RootFrag {
 
     @Override
     public boolean onBackPresss() {// 记录设置的时间并退出
-        long playDuration = Integer.parseInt(edSettingPlay.getText().toString());// 获取玩耍时长
-        long restDuration = Integer.parseInt(edSettingRest.getText().toString());// 获取休息时长
-
-        if (playDuration < RootComponent.SETTING_DEFAULT_PLAY_MIN) {// 最小玩耍时长10分钟(ms)
-            playDuration = RootComponent.SETTING_DEFAULT_PLAY_MIN;
-            edSettingPlay.setText(String.valueOf(playDuration));
-        }
-        if (restDuration < RootComponent.SETTING_DEFAULT_REST_MIN) {// 最小休息时长30分钟(ms)
-            restDuration = RootComponent.SETTING_DEFAULT_REST_MIN;
-            edSettingRest.setText(String.valueOf(restDuration));
-        }
-        // 设置(ms)
-        ShareUtils.set(RootComponent.SETTING_PLAY_TIME, playDuration * 60L * 1000L);
-        ShareUtils.set(RootComponent.SETTING_REST_TIME, restDuration * 60L * 1000L);
+        // TODO: 2020/6/5  退出时- 设置防沉迷
+        long totalPermit = Long.parseLong(edSettingTotalPermitPlay.getText().toString()) * 60 * 1000;
+        PreventHelper.setTotalPermitDuration(totalPermit);
         // 退出
         toFrag(getClass(), Frag_main.class, null, true);
         return true;
