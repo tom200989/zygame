@@ -40,12 +40,12 @@ public class Frag_main extends RootFrag {
      */
     private void creatSpRestData() {
 
-        // TODO: 2020/6/5  当时长大于6小时: 每日清零
+        // 防沉迷: 当时长大于6小时: 每日清零
         if (PreventHelper.getCurrentTime() - PreventHelper.getLastRecordTime() > PREVENT_CLEAR_TIME) {
             PreventHelper.setTotalDuration(0);
         }
 
-        // todo 初始化防沉迷数据
+        // 防沉迷: 初始化防沉迷数据
         PreventBean preventBean = PreventHelper.getPrevent();
         if (preventBean == null) {
             PreventHelper.initPrevent();
@@ -74,12 +74,12 @@ public class Frag_main extends RootFrag {
         ivMainSetting.setOnClickListener(v -> toFrag(getClass(), Frag_setting.class, null, true));
         // 跳转到FISH
         ivMainFish.setOnClickListener(v -> {
-            // TODO: 2020/6/5  当时长大于12小时: 每日清零
+            // 防沉迷: 当时长大于12小时: 每日清零
             if (PreventHelper.getCurrentTime() - PreventHelper.getLastRecordTime() > PREVENT_CLEAR_TIME) {
                 PreventHelper.setTotalDuration(0);
             }
 
-            // TODO: 2020/6/5 防沉迷进入判断
+            // 防沉迷: 防沉迷进入判断
             long totalDuration = PreventHelper.getTotalDuration();// 获取一共玩了多久
             long totalPermitPlayDuration = PreventHelper.getTotalPermitDuration();// 获取一共允许玩多久
             if (totalDuration >= totalPermitPlayDuration) {// 如果当天超时了 - 提示

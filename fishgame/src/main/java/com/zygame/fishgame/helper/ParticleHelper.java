@@ -2,6 +2,7 @@ package com.zygame.fishgame.helper;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -12,7 +13,7 @@ import com.zygame.fishgame.R;
 @SuppressLint("StaticFieldLeak")
 public class ParticleHelper {
 
-    public static ParticleSystem particleSystem;
+    public static ParticleSystem leniod;
     public static int TYPE_DEFAULT = 0;// 默认效果(无效果)
     public static int TYPE_WIND = 1;// 秋天效果
     public static int TYPE_SNOW = 2;// 冬天效果
@@ -28,15 +29,19 @@ public class ParticleHelper {
      */
     public static void wind(Activity activity, View showView, int yeziCount, int stayTime) {
         // 先停止之前的效果
-        if (particleSystem != null) {
-            particleSystem.stopEmitting();
-            particleSystem = null;
+        if (leniod != null) {
+            leniod.stopEmitting();
+            leniod = null;
         }
-        particleSystem = new ParticleSystem(activity, 100, R.drawable.yezi_leniod, stayTime);// 粒子数量+停留时间
-        particleSystem.setSpeedRange(0.1f, 0.2f)// 速度
-                .setRotationSpeedRange(0, 60)// 叶子旋转范围
-                .setInitialRotationRange(0, 0)// 初始化叶子角度
-                .oneShot(showView, yeziCount);// 控制叶子的数量
+        // 加handler的目的是利用延迟来解决stopEmitting时销毁view不及时而导致上一个粒子效果停留在界面上, 也可以使用其他延时方式
+        new Handler().postDelayed(() -> {
+            leniod = new ParticleSystem(activity, 15, R.drawable.yezi_leniod, stayTime);// 粒子数量+停留时间
+            leniod.setSpeedModuleAndAngleRange(0f, 0.1f, 0, 135)//速度和角度 
+                    .setRotationSpeed(144)// 选择速度
+                    .setAcceleration(0.000017f, 90)// 加速
+                    .emit(showView, yeziCount);// 控制叶子数量的因素
+        }, 3000);
+
     }
 
     /**
@@ -49,16 +54,18 @@ public class ParticleHelper {
      */
     public static void rain(Activity activity, View showView, int rainCount, int stayTime) {
         // 先停止之前的效果
-        if (particleSystem != null) {
-            particleSystem.stopEmitting();
-            particleSystem = null;
+        if (leniod != null) {
+            leniod.stopEmitting();
+            leniod = null;
         }
-        particleSystem = new ParticleSystem(activity, 800, R.drawable.yudi_leniod, stayTime);// 粒子数量+停留时间
-        particleSystem.setAcceleration(0.00013f, 90)// 加速
-                .setSpeedByComponentsRange(0f, 0f, 0.05f, 0.1f)// 速度范围
-                .setFadeOut(200, new AccelerateInterpolator())// 粒子出现时间
-                .emitWithGravity(showView, Gravity.BOTTOM, rainCount);// 控制雨滴数量
-
+        // 加handler的目的是利用延迟来解决stopEmitting时销毁view不及时而导致上一个粒子效果停留在界面上, 也可以使用其他延时方式
+        new Handler().postDelayed(() -> {
+            leniod = new ParticleSystem(activity, 800, R.drawable.yudi_leniod, stayTime);// 粒子数量+停留时间
+            leniod.setAcceleration(0.00013f, 90)// 加速
+                    .setSpeedByComponentsRange(0f, 0f, 0.05f, 0.1f)// 速度范围
+                    .setFadeOut(200, new AccelerateInterpolator())// 粒子出现时间
+                    .emitWithGravity(showView, Gravity.BOTTOM, rainCount);// 控制雨滴数量
+        }, 3000);
     }
 
     /**
@@ -71,15 +78,18 @@ public class ParticleHelper {
      */
     public static void snow(Activity activity, View showView, int snowCount, int stayTime) {
         // 先停止之前的效果
-        if (particleSystem != null) {
-            particleSystem.stopEmitting();
-            particleSystem = null;
+        if (leniod != null) {
+            leniod.stopEmitting();
+            leniod = null;
         }
-        particleSystem = new ParticleSystem(activity, 15, R.drawable.snow_leniod, stayTime);// 粒子数量+停留时间
-        particleSystem.setSpeedModuleAndAngleRange(0f, 0.1f, 0, 135)//速度和角度 
-                .setRotationSpeed(144)// 选择速度
-                .setAcceleration(0.000017f, 90)// 加速
-                .emit(showView, snowCount);// 控制雪花数量的因素
+        // 加handler的目的是利用延迟来解决stopEmitting时销毁view不及时而导致上一个粒子效果停留在界面上, 也可以使用其他延时方式
+        new Handler().postDelayed(() -> {
+            leniod = new ParticleSystem(activity, 15, R.drawable.snow_leniod, stayTime);// 粒子数量+停留时间
+            leniod.setSpeedModuleAndAngleRange(0f, 0.1f, 0, 135)//速度和角度 
+                    .setRotationSpeed(144)// 选择速度
+                    .setAcceleration(0.000017f, 90)// 加速
+                    .emit(showView, snowCount);// 控制雪花数量的因素
+        }, 3000);
     }
 
 }

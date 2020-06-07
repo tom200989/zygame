@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:visibility="invisible"
         app:layout_heightPercent="37%h" />
-    
+
     <!-- 可变背景 (前置显示) -->
     <com.hiber.tools.layout.PercentRelativeLayout
         android:id="@+id/rl_main_change_bg"
@@ -149,6 +149,6 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-250dp" />
+        android:layout_marginTop="-350dp" />
 
 </com.hiber.tools.layout.PercentRelativeLayout>

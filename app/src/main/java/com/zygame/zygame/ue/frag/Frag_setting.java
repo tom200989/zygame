@@ -52,7 +52,7 @@ public class Frag_setting extends RootFrag {
 
     @Override
     public boolean onBackPresss() {// 记录设置的时间并退出
-        // TODO: 2020/6/5  退出时- 设置防沉迷
+        // 防沉迷: 退出时- 设置防沉迷数据
         long totalPermit = Long.parseLong(edSettingTotalPermitPlay.getText().toString()) * 60 * 1000;
         PreventHelper.setTotalPermitDuration(totalPermit);
         // 退出

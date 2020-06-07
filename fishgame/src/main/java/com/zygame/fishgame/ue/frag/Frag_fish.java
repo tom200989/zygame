@@ -125,7 +125,7 @@ public class Frag_fish extends RootFrag {
      * 初始化属性
      */
     private void initAttr() {
-        // todo 防沉迷: 进入游戏 - 记录当前临时时间 - 用于监控单次玩耍时长
+        // 防沉迷: 进入游戏 - 记录当前临时时间 - 用于监控单次玩耍时长
         tempTime = PreventHelper.getCurrentTime();
         // 播放背景音乐
         bgVoice = getBgVoice(true);
@@ -173,7 +173,7 @@ public class Frag_fish extends RootFrag {
     public void onNexts(Object o, View view, String s) {
         // 开启定时器
         timerState = TimerState.ON_BUT_OFF_WHEN_HIDE_AND_PAUSE;
-        // todo 启动防沉迷线程
+        // 防沉迷: 启动防沉迷线程
         threadPoolProxy.executeTask(new RestRunable());
         // 开启分数观察线程
         threadPoolProxy.executeTask(new GoalRunnable());
@@ -189,9 +189,11 @@ public class Frag_fish extends RootFrag {
 
     @Override
     public boolean onBackPresss() {
-        // TOAT: 此处不能在保存totalDuration和lastRecordDuration到SP - 否则会与防沉迷子线程产生冲突
 
-        // TOAT: 此处一定要先停止循环再进行tempTime清零
+        /*
+         * 防沉迷: 此处不能在保存totalDuration和lastRecordDuration到SP - 否则会与防沉迷子线程产生冲突
+         * 此处一定要先停止循环再进行tempTime清零
+         */
         restFlag = false;
         // 清零
         tempTime = 0;
@@ -204,6 +206,12 @@ public class Frag_fish extends RootFrag {
         // 跳转
         toFragModule(getClass(), RootComponent.SPLASH_AC, RootComponent.FRAG_MAIN, null, false, getClass());
         return true;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        onBackPresss();
     }
 
     @Override
@@ -281,7 +289,7 @@ public class Frag_fish extends RootFrag {
     private void triggerLeniodAndBg() {
         bgCount += 2;
         // 每个N秒变换一次
-        if (bgCount % 120 == 0) {
+        if (bgCount % 10 == 0) {
             if (currentLeniodType == ParticleHelper.TYPE_DEFAULT) {// 如果当前是默认效果 - 则启动［下雨］- 修改标记为［下雨］
                 ParticleHelper.rain(activity, rlMainLeniod, 5, 10000);
                 currentLeniodType = ParticleHelper.TYPE_RAIN;
@@ -292,11 +300,11 @@ public class Frag_fish extends RootFrag {
 
 
             } else if (currentLeniodType == ParticleHelper.TYPE_SNOW) {// 如果当前是下雪效果 - 则启动［刮风］- 修改标记为［刮风］
-                ParticleHelper.wind(activity, rlMainLeniod, 80, 10000);
+                ParticleHelper.wind(activity, rlMainLeniod, 5, 10000);
                 currentLeniodType = ParticleHelper.TYPE_WIND;
 
             } else if (currentLeniodType == ParticleHelper.TYPE_WIND) {// 如果当前是刮风效果 - 则恢复［默认］- 修改标记为［默认］
-                ParticleHelper.particleSystem.stopEmitting();
+                ParticleHelper.leniod.stopEmitting();
                 currentLeniodType = ParticleHelper.TYPE_DEFAULT;
             }
 
@@ -686,18 +694,14 @@ public class Frag_fish extends RootFrag {
         public void run() {
             while (restFlag) {
                 try {
-                    // TODO: 2020/6/5 计算本次时长
+                    // 防沉迷: 计算本次时长
                     long curTotalTime = PreventHelper.getTotalDuration() + period;
-                    // TODO: 2020/6/5 叠加总玩时长
+                    // 防沉迷: 叠加总玩时长
                     PreventHelper.setTotalDuration(curTotalTime);
-                    // TODO: 2020/6/5 设置最后记录时间 
+                    // 防沉迷: 设置最后记录时间 
                     PreventHelper.setLastRecordTime(PreventHelper.getCurrentTime());
-                    // TODO: 2020/6/5 如果大于总允许时长
+                    // 防沉迷: 如果大于总允许时长
                     long totalPermitDuration = PreventHelper.getTotalPermitDuration();
-
-                    System.out.println("frag_fish: curTotalTime = " + curTotalTime);
-                    System.out.println("frag_fish: totalPermitDuration = " + totalPermitDuration);
-                    System.out.println("--------------------------------------------------------------------------");
 
                     if (curTotalTime >= totalPermitDuration) {
                         activity.runOnUiThread(() -> {
