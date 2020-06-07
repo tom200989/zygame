@@ -680,19 +680,26 @@ public class Frag_fish extends RootFrag {
      */
     class RestRunable implements Runnable {
 
+        private int period = 1000;// 时间间隔
+
         @Override
         public void run() {
             while (restFlag) {
                 try {
                     // TODO: 2020/6/5 计算本次时长
-                    long curTotalTime = PreventHelper.getTotalDuration() + (PreventHelper.getCurrentTime() - tempTime);
+                    long curTotalTime = PreventHelper.getTotalDuration() + period;
                     // TODO: 2020/6/5 叠加总玩时长
                     PreventHelper.setTotalDuration(curTotalTime);
-                    System.out.println("frag_main: each loop getTotalDuration= " + PreventHelper.getTotalDuration());
                     // TODO: 2020/6/5 设置最后记录时间 
                     PreventHelper.setLastRecordTime(PreventHelper.getCurrentTime());
                     // TODO: 2020/6/5 如果大于总允许时长
-                    if (curTotalTime >= PreventHelper.getTotalPermitDuration()) {
+                    long totalPermitDuration = PreventHelper.getTotalPermitDuration();
+
+                    System.out.println("frag_fish: curTotalTime = " + curTotalTime);
+                    System.out.println("frag_fish: totalPermitDuration = " + totalPermitDuration);
+                    System.out.println("--------------------------------------------------------------------------");
+
+                    if (curTotalTime >= totalPermitDuration) {
                         activity.runOnUiThread(() -> {
                             restFlag = false;
                             // 弹出框
@@ -710,7 +717,7 @@ public class Frag_fish extends RootFrag {
 
                         break;
                     }
-                    Thread.sleep(1000);
+                    Thread.sleep(period);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
