@@ -2,7 +2,7 @@ package com.zygame.common.helper;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hiber.tools.ShareUtils;
-import com.zygame.common.PreventBean;
+import com.zygame.common.bean.PreventBean;
 import com.zygame.common.component.RootComponent;
 
 import static com.zygame.common.component.RootComponent.PREVENT_INIT_TOTAL_PERMIT;

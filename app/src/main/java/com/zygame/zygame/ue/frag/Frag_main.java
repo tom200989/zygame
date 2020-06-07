@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hiber.hiber.RootFrag;
-import com.zygame.common.PreventBean;
+import com.zygame.common.bean.PreventBean;
 import com.zygame.common.component.RootComponent;
 import com.zygame.common.helper.PreventHelper;
 import com.zygame.zygame.R;
@@ -94,8 +94,8 @@ public class Frag_main extends RootFrag {
 
         });
         // 跳转到ICE
-        // ivMainIce.setOnClickListener(v -> toFragModule(getClass(), RootComponent.ICE_AC, RootComponent.FRAG_ICE, null, true));
-        ivMainIce.setOnClickListener(v -> toast("阳阳雪糕店还没建好噢~", 5000));
+        ivMainIce.setOnClickListener(v -> toFragModule(getClass(), RootComponent.ICE_AC, RootComponent.FRAG_ICE, null, true));
+        // ivMainIce.setOnClickListener(v -> toast("阳阳雪糕店还没建好噢~", 5000));
     }
 
     @Override

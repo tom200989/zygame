@@ -1,14 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.hiber.tools.layout.PercentRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.hiber.tools.layout.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:gravity="center"
     android:layout_height="match_parent">
-    
-    <TextView
-        android:textSize="30sp"
-        android:text="This is ICE"
+
+    <!-- 背景 -->
+    <HorizontalScrollView
+        android:id="@+id/sv_ice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:foregroundGravity="fill_horizontal"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_splash_had_ice_shop"
+            tools:ignore="ContentDescription" />
+
+    </HorizontalScrollView>
+
+    <!-- 小车 -->
+    <com.hiber.tools.layout.PercentRelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:layout_heightPercent="66%h"
+        app:layout_widthPercent="53.9%h">
+
+        <!-- 小车 -->
+        <ImageView
+            android:id="@+id/iv_ice_car"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/food_car"
+            app:layout_marginBottomPercent="5%h"
+            tools:ignore="ContentDescription" />
+
+        <!-- 车轮1 -->
+        <ImageView
+            android:id="@+id/wh_ice_car1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_ice_car"
+            android:src="@drawable/food_car_wheel"
+            app:layout_heightPercent="10%h"
+            app:layout_marginBottomPercent="0.5%h"
+            app:layout_marginStartPercent="27%w"
+            app:layout_widthPercent="10%h"
+            tools:ignore="ContentDescription" />
+
+        <!-- 车轮2 -->
+        <ImageView
+            android:id="@+id/wh_ice_car2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_ice_car"
+            android:src="@drawable/food_car_wheel"
+            app:layout_heightPercent="10%h"
+            app:layout_marginBottomPercent="0.5%h"
+            app:layout_marginStartPercent="67.8%w"
+            app:layout_widthPercent="10%h"
+            tools:ignore="ContentDescription" />
+
+    </com.hiber.tools.layout.PercentRelativeLayout>
 
 </com.hiber.tools.layout.PercentRelativeLayout>
