@@ -99,6 +99,11 @@ public class Frag_fish extends RootFrag {
     private MediaPlayer bgVoice;
     private MediaPlayer fishVoice;
     private long tempTime;// 临时计时 - 用于辅助计算单次时长
+    private int[] bgRes = {// 背景资源
+            R.drawable.bg_rain,// 下雨背景
+            R.drawable.bg_winter,// 下雪背景
+            R.drawable.bg_autumn,// 刮风背景
+            R.drawable.bg_night};// 夜晚背景
 
     @Override
     public int onInflateLayout() {
@@ -289,21 +294,24 @@ public class Frag_fish extends RootFrag {
     private void triggerLeniodAndBg() {
         bgCount += 2;
         // 每个N秒变换一次
-        if (bgCount % 10 == 0) {
+        if (bgCount % 30 == 0) {
             if (currentLeniodType == ParticleHelper.TYPE_DEFAULT) {// 如果当前是默认效果 - 则启动［下雨］- 修改标记为［下雨］
                 ParticleHelper.rain(activity, rlMainLeniod, 5, 10000);
                 currentLeniodType = ParticleHelper.TYPE_RAIN;
 
             } else if (currentLeniodType == ParticleHelper.TYPE_RAIN) {// 如果当前是下雨效果 - 则启动［下雪］- 修改标记为［下雪］
                 ParticleHelper.snow(activity, rlMainLeniod, 5, 10000);
-                currentLeniodType = ParticleHelper.TYPE_SNOW;
+                currentLeniodType = ParticleHelper.TYPE_WINTER;
 
-
-            } else if (currentLeniodType == ParticleHelper.TYPE_SNOW) {// 如果当前是下雪效果 - 则启动［刮风］- 修改标记为［刮风］
+            } else if (currentLeniodType == ParticleHelper.TYPE_WINTER) {// 如果当前是下雪效果 - 则启动［刮风］- 修改标记为［刮风］
                 ParticleHelper.wind(activity, rlMainLeniod, 5, 10000);
-                currentLeniodType = ParticleHelper.TYPE_WIND;
+                currentLeniodType = ParticleHelper.TYPE_AUTUMN;
 
-            } else if (currentLeniodType == ParticleHelper.TYPE_WIND) {// 如果当前是刮风效果 - 则恢复［默认］- 修改标记为［默认］
+            } else if (currentLeniodType == ParticleHelper.TYPE_AUTUMN) {// 如果当前是刮风效果 - 则启动［夜晚］- 修改标记为［夜晚］
+                ParticleHelper.night(activity, rlMainLeniod, 5, 10000);
+                currentLeniodType = ParticleHelper.TYPE_NIGHT;
+
+            } else if (currentLeniodType == ParticleHelper.TYPE_NIGHT) {// 如果当前是夜晚效果 - 则恢复［默认］- 修改标记为［默认］
                 ParticleHelper.leniod.stopEmitting();
                 currentLeniodType = ParticleHelper.TYPE_DEFAULT;
             }
@@ -320,15 +328,10 @@ public class Frag_fish extends RootFrag {
      */
     private void setChangeBgAnim(int type) {
         // 设置背景
-        if (type == ParticleHelper.TYPE_RAIN) {
-            rlMainChangeBg.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_rain));
-        } else if (type == ParticleHelper.TYPE_SNOW) {
-            rlMainChangeBg.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_winter));
-        } else if (type == ParticleHelper.TYPE_WIND) {
-            rlMainChangeBg.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_autumn));
-        } else if (type == ParticleHelper.TYPE_DEFAULT) {
-            rlMainChangeBgStore.setBackground(null);
-        }
+        setTopBg(type,// 类型
+                rlMainChangeBg,// 前景容器
+                bgRes // 背景资源
+        );
         // 设置动画
         AlphaAnimation al = new AlphaAnimation(type == ParticleHelper.TYPE_DEFAULT ? 1 : 0, type == ParticleHelper.TYPE_DEFAULT ? 0 : 1);
         al.setDuration(3000);
@@ -346,15 +349,10 @@ public class Frag_fish extends RootFrag {
                 rlMainChangeBg.setVisibility(type == ParticleHelper.TYPE_DEFAULT ? View.INVISIBLE : View.VISIBLE);
                 rlMainChangeBgStore.setVisibility(type == ParticleHelper.TYPE_DEFAULT ? View.INVISIBLE : View.VISIBLE);
                 // 设置衬底背景
-                if (type == ParticleHelper.TYPE_RAIN) {
-                    rlMainChangeBgStore.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_rain));
-                } else if (type == ParticleHelper.TYPE_SNOW) {
-                    rlMainChangeBgStore.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_winter));
-                } else if (type == ParticleHelper.TYPE_WIND) {
-                    rlMainChangeBgStore.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_autumn));
-                } else if (type == ParticleHelper.TYPE_DEFAULT) {
-                    rlMainChangeBgStore.setBackground(null);
-                }
+                setTopBg(type,// 类型
+                        rlMainChangeBgStore,// 衬底容器
+                        bgRes // 背景资源
+                );
             }
 
             @Override
@@ -366,6 +364,22 @@ public class Frag_fish extends RootFrag {
         rlMainChangeBg.setAnimation(al);
         al.startNow();
         rlMainChangeBg.startAnimation(al);
+    }
+
+    /**
+     * 设置［前景］或者［衬底］背景
+     *
+     * @param type  类型
+     * @param rl_bg 背景蓉欧工期
+     * @param bgRes 背景资源
+     */
+    private void setTopBg(int type, RelativeLayout rl_bg, int[] bgRes) {
+        // 设置衬底背景
+        if (type == ParticleHelper.TYPE_DEFAULT) {
+            rl_bg.setBackground(null);
+        } else {
+            rl_bg.setBackground(ContextCompat.getDrawable(activity, bgRes[type - 1]));
+        }
     }
 
     /**

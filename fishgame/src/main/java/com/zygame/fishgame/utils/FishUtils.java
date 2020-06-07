@@ -33,6 +33,7 @@ public class FishUtils {
         fish_ls.add(R.drawable.fish8);
         fish_ls.add(R.drawable.fish9);
         fish_ls.add(R.drawable.fish10);
+
         fish_ls.add(R.drawable.fish11);
         fish_ls.add(R.drawable.fish12);
         fish_ls.add(R.drawable.fish13);
@@ -43,6 +44,7 @@ public class FishUtils {
         fish_ls.add(R.drawable.fish18);
         fish_ls.add(R.drawable.fish19);
         fish_ls.add(R.drawable.fish20);
+
         fish_ls.add(R.drawable.fish21);
         fish_ls.add(R.drawable.fish22);
         fish_ls.add(R.drawable.fish23);
@@ -54,6 +56,7 @@ public class FishUtils {
         fish_ls.add(R.drawable.fish28);
         fish_ls.add(R.drawable.fish29);
         fish_ls.add(R.drawable.fish30);
+        
         fish_ls.add(R.drawable.fish31);
         fish_ls.add(R.drawable.fish32);
         fish_ls.add(R.drawable.fish33);
@@ -63,6 +66,50 @@ public class FishUtils {
         fish_ls.add(R.drawable.fish37);
         fish_ls.add(R.drawable.fish38);
         fish_ls.add(R.drawable.fish39);
+
+        fish_ls.add(R.drawable.fish40);
+        fish_ls.add(R.drawable.fish41);
+        fish_ls.add(R.drawable.fish42);
+        fish_ls.add(R.drawable.fish43);
+        fish_ls.add(R.drawable.fish44);
+        fish_ls.add(R.drawable.fish45);
+        fish_ls.add(R.drawable.fish46);
+        fish_ls.add(R.drawable.fish47);
+        fish_ls.add(R.drawable.fish48);
+        fish_ls.add(R.drawable.fish49);
+
+        fish_ls.add(R.drawable.fish50);
+        fish_ls.add(R.drawable.fish51);
+        fish_ls.add(R.drawable.fish52);
+        fish_ls.add(R.drawable.fish53);
+        fish_ls.add(R.drawable.fish54);
+        fish_ls.add(R.drawable.fish55);
+        fish_ls.add(R.drawable.fish56);
+        fish_ls.add(R.drawable.fish57);
+        fish_ls.add(R.drawable.fish58);
+        fish_ls.add(R.drawable.fish59);
+
+        fish_ls.add(R.drawable.fish60);
+        fish_ls.add(R.drawable.fish61);
+        fish_ls.add(R.drawable.fish62);
+        fish_ls.add(R.drawable.fish63);
+        fish_ls.add(R.drawable.fish64);
+        fish_ls.add(R.drawable.fish65);
+        fish_ls.add(R.drawable.fish66);
+        fish_ls.add(R.drawable.fish67);
+        fish_ls.add(R.drawable.fish68);
+        fish_ls.add(R.drawable.fish69);
+
+        fish_ls.add(R.drawable.fish70);
+        fish_ls.add(R.drawable.fish71);
+        fish_ls.add(R.drawable.fish72);
+        fish_ls.add(R.drawable.fish73);
+        fish_ls.add(R.drawable.fish74);
+        fish_ls.add(R.drawable.fish75);
+        fish_ls.add(R.drawable.fish76);
+        fish_ls.add(R.drawable.fish77);
+
+
         // 转换
         int[] fish_arr = new int[fish_ls.size()];
         for (int i = 0; i < fish_arr.length; i++) {
