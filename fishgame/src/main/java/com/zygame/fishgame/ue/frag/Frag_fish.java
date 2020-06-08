@@ -167,10 +167,10 @@ public class Frag_fish extends RootFrag {
         bearShootHelper.bind(ivMainShoot);
 
         // 退出按钮
-        ivMainExit.setOnClickListener(v -> onBackPresss());
+        ivMainExit.setOnClickListener(v -> clickExit());
 
         // 退出面板
-        gwMainFinish.setOnCLickGoalFinishListener(this::onBackPresss);
+        gwMainFinish.setOnCLickGoalFinishListener(this::clickExit);
 
     }
 
@@ -187,14 +187,21 @@ public class Frag_fish extends RootFrag {
     @Override
     public void setTimerTask() {
         // 定时每隔2秒生成一条鱼
-        randomCreatFish();
+        creatFish();
         // 定时切换背景
-        triggerLeniodAndBg();
+        turnBackground();
     }
 
     @Override
     public boolean onBackPresss() {
+        // 屏蔽返回键
+        return true;
+    }
 
+    /**
+     * 为解决息屏退出问题, 此处用clickExit代替backpress
+     */
+    private void clickExit() {
         /*
          * 防沉迷: 此处不能在保存totalDuration和lastRecordDuration到SP - 否则会与防沉迷子线程产生冲突
          * 此处一定要先停止循环再进行tempTime清零
@@ -210,19 +217,13 @@ public class Frag_fish extends RootFrag {
         threadPoolProxy.shutAll();
         // 跳转
         toFragModule(getClass(), RootComponent.SPLASH_AC, RootComponent.FRAG_MAIN, null, false, getClass());
-        return true;
     }
+    
 
     @Override
     public void onPause() {
         super.onPause();
-        onBackPresss();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        onBackPresss();
+        clickExit();
     }
 
     /* -------------------------------------------- private -------------------------------------------- */
@@ -291,7 +292,7 @@ public class Frag_fish extends RootFrag {
     /**
      * 定时切换背景以及切换粒子效果
      */
-    private void triggerLeniodAndBg() {
+    private void turnBackground() {
         bgCount += 2;
         // 每个N秒变换一次
         if (bgCount % 30 == 0) {
@@ -324,14 +325,11 @@ public class Frag_fish extends RootFrag {
     /**
      * 修改可变背景图片
      *
-     * @param type 当前粒子效果
+     * @param type 当前粒子效果类型
      */
     private void setChangeBgAnim(int type) {
         // 设置背景
-        setTopBg(type,// 类型
-                rlMainChangeBg,// 前景容器
-                bgRes // 背景资源
-        );
+        setTopBg(type, rlMainChangeBg, bgRes);
         // 设置动画
         AlphaAnimation al = new AlphaAnimation(type == ParticleHelper.TYPE_DEFAULT ? 1 : 0, type == ParticleHelper.TYPE_DEFAULT ? 0 : 1);
         al.setDuration(3000);
@@ -346,13 +344,10 @@ public class Frag_fish extends RootFrag {
             @Override
             public void onAnimationEnd(Animation animation) {
                 // 如果当前是默认效果 - 隐藏; 反之显示
-                rlMainChangeBg.setVisibility(type == ParticleHelper.TYPE_DEFAULT ? View.INVISIBLE : View.VISIBLE);
-                rlMainChangeBgStore.setVisibility(type == ParticleHelper.TYPE_DEFAULT ? View.INVISIBLE : View.VISIBLE);
+                rlMainChangeBg.setVisibility(type == ParticleHelper.TYPE_DEFAULT ? View.GONE : View.VISIBLE);
+                rlMainChangeBgStore.setVisibility(rlMainChangeBg.getVisibility());
                 // 设置衬底背景
-                setTopBg(type,// 类型
-                        rlMainChangeBgStore,// 衬底容器
-                        bgRes // 背景资源
-                );
+                setTopBg(type, rlMainChangeBgStore, bgRes);
             }
 
             @Override
@@ -386,7 +381,7 @@ public class Frag_fish extends RootFrag {
      * 随机生成小鱼
      */
     @SuppressLint("ResourceType")
-    private void randomCreatFish() {
+    private void creatFish() {
         // TOAT: 先判断波浪是否加载完毕 (此步骤为必要步骤, 否则, 当小鱼线程启动时, 小鱼相对屏幕的坐标可能还获取不到)
         float waveViewPosY = waveView.getY() + waveView.getHeight();
         if (waveViewPosY == 0) {

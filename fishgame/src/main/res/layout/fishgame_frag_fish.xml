@@ -8,12 +8,6 @@
     android:background="@drawable/fish_ocean_bg"
     tools:ignore="ContentDescription">
 
-    <!-- 鱼塘 -->
-    <com.hiber.tools.layout.PercentRelativeLayout
-        android:id="@+id/rl_main_fishArea"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <!-- 可变背景(衬底:用于无缝切换) -->
     <com.hiber.tools.layout.PercentRelativeLayout
         android:id="@+id/rl_main_change_bg_store"
@@ -100,6 +94,14 @@
         android:src="@color/common_colorYugou"
         app:layout_marginStartPercent="0.85%w"
         app:layout_marginTopPercent="0.8%w" />
+
+    <!-- 鱼塘 -->
+    <com.hiber.tools.layout.PercentRelativeLayout
+        android:id="@+id/rl_main_fishArea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- +++++++++++++++++++++++++++++鱼塘要放在上面的最后+++++++++++++++++++++++++++++++ -->
 
     <!-- 钓鱼按钮 -->
     <ImageView

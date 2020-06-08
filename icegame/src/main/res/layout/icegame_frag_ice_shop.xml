@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hiber.tools.layout.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shop">
+
+    <!-- 货架 -->
+    <com.hiber.tools.layout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        app:layout_heightPercent="60%h"
+        app:layout_marginBottomPercent="5%h">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/ice_merchant"
+            app:layout_widthPercent="70%h"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/ice_merchant2"
+            app:layout_marginStartPercent="1%w"
+            app:layout_widthPercent="70%h"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/ice_merchant3"
+            app:layout_marginStartPercent="1%w"
+            app:layout_widthPercent="70%h"
+            tools:ignore="ContentDescription" />
+
+    </com.hiber.tools.layout.PercentLinearLayout>
+
+</com.hiber.tools.layout.PercentRelativeLayout>

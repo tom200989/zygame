@@ -84,6 +84,7 @@ public class Frag_ice extends RootFrag {
                             carTimer.stop();// sv停止滑动
                             whIceCar1.clearAnimation();// 停止动画
                             whIceCar2.clearAnimation();// 停止动画
+                            toFrag(Frag_ice.this.getClass(), null, null, true);// 跳转
                             return;
                         }
                         // 2.2.使scrollview滚动
