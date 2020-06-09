@@ -5,10 +5,14 @@ import com.hiber.hiber.RootMAActivity;
 import com.zygame.icegame.BuildConfig;
 import com.zygame.icegame.R;
 import com.zygame.icegame.ue.frag.Frag_ice;
+import com.zygame.icegame.ue.frag.Frag_ice_shop;
 
 public class IceActivity extends RootMAActivity {
 
-    private Class[] frags = {Frag_ice.class};
+    private Class[] frags = {
+            Frag_ice_shop.class , // 雪糕起始页
+            Frag_ice.class , // 雪糕起始页
+    };
 
     @Override
     public RootProperty initProperty() {

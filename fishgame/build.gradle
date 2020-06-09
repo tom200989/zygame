@@ -72,6 +72,6 @@ dependencies {
    
     // --------------- 下方添加你的其他依赖 ---------------
     api(name: 'ma_wave', ext: 'aar') // 波浪
-    api files('libs/nineoldandroid.jar') // 视图移动辅助
+    // 视图移动辅助
     api 'com.plattysoft.leonids:LeonidsLib:1.3.2' // 粒子效果
 }

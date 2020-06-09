@@ -53,7 +53,8 @@ dependencies {
     api library.multidex // 必须引用multidex 库
     api library.eventbus // 必须引用eventbus 库
     api library.recyclerview // 必须引用recyclerview 库
-    api library.butterknife1 // 必须引用butterknife库
+    api library.butterknife1
+    implementation files('libs\\nineoldandroid.jar') // 必须引用butterknife库
     annotationProcessor library.butterknife2 // 必须引用butterknife库
     api library.fastjson // 解析库
 

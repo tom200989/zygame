@@ -11,8 +11,8 @@ import com.zygame.zygame.ue.frag.Frag_splash;
 public class SplashActivity extends RootMAActivity {
 
     private Class[] frags = {// 
-            Frag_splash.class,// 启动页
             Frag_main.class, // 主页
+            Frag_splash.class,// 启动页
             Frag_setting.class,// 设置页
     };
 

@@ -1,6 +1,7 @@
 package com.zygame.icegame.ue.frag;
 
 import android.annotation.SuppressLint;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
@@ -84,7 +85,7 @@ public class Frag_ice extends RootFrag {
                             carTimer.stop();// sv停止滑动
                             whIceCar1.clearAnimation();// 停止动画
                             whIceCar2.clearAnimation();// 停止动画
-                            toFrag(Frag_ice.this.getClass(), null, null, true);// 跳转
+                            new Handler().postDelayed(() -> toFrag(Frag_ice.this.getClass(), Frag_ice_shop.class, null, true), 3000);
                             return;
                         }
                         // 2.2.使scrollview滚动
@@ -125,7 +126,8 @@ public class Frag_ice extends RootFrag {
 
     @Override
     public boolean onBackPresss() {
-        return false;
+        // 屏幕回退键
+        return true;
     }
 
 }

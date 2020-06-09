@@ -115,7 +115,7 @@ public class BearMoveHelper {
                 ViewHelper.setTranslationX(ivYugou, translationYugouX);
                 ViewHelper.setTranslationX(blowPop, translationBlowX);
                 ViewHelper.setTranslationX(ivYuxian, translationYuxianX);
-                // 2.6.更新x坐标
+                // 2.6.更新x坐标(该步骤必须要做, 否则view会偏移)
                 rlSpriteBear.setX(translationBearX);
                 ivYugou.setX(translationYugouX);
                 blowPop.setX(translationBlowX);

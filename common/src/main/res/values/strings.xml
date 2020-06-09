@@ -10,4 +10,17 @@
     <string name="common_app_setting_des4">每天只能玩</string>
     <string name="common_app_setting_tip">休息时间还没过,先休息一下噢</string>
     <string name="common_app_setting_tip2">今天已经玩了很久了, 明天再玩吧</string>
+
+    <string name="common_ice_shop_egg">鸡蛋</string>
+    <string name="common_ice_shop_mianfen">面粉</string>
+    <string name="common_ice_shop_suannai">酸奶</string>
+    <string name="common_ice_shop_nailao">奶酪</string>
+    <string name="common_ice_shop_milk2">大熊牛奶</string>
+    <string name="common_ice_shop_milk3">大象牛奶</string>
+    <string name="common_ice_shop_milk4">大牛牛奶</string>
+    <string name="common_ice_shop_milk5">小兔牛奶</string>
+    <string name="common_ice_shop_milk6">蓝莓牛奶</string>
+    <string name="common_ice_shop_milk7">巧克力牛奶</string>
+    <string name="common_ice_shop_milk8">小鸟牛奶</string>
+    <string name="common_ice_shop_tip">你还没有买材料噢</string>
 </resources>

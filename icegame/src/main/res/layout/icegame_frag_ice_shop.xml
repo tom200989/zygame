@@ -8,39 +8,396 @@
 
     <!-- 货架 -->
     <com.hiber.tools.layout.PercentLinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/ll_ice_merchant"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         app:layout_heightPercent="60%h"
-        app:layout_marginBottomPercent="5%h">
+        app:layout_marginBottomPercent="5%h"
+        app:layout_widthPercent="50%w">
 
-        <ImageView
+        <!-- 柜子1 -->
+        <com.hiber.tools.layout.PercentRelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:background="@drawable/ice_merchant"
             android:scaleType="fitXY"
-            android:src="@drawable/ice_merchant"
             app:layout_widthPercent="70%h"
             tools:ignore="ContentDescription" />
 
-        <ImageView
+        <!-- 柜子2 -->
+        <com.hiber.tools.layout.PercentRelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:background="@drawable/ice_merchant3"
             android:scaleType="fitXY"
-            android:src="@drawable/ice_merchant2"
-            app:layout_marginStartPercent="1%w"
-            app:layout_widthPercent="70%h"
-            tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@drawable/ice_merchant3"
-            app:layout_marginStartPercent="1%w"
+            app:layout_marginStartPercent="5%w"
             app:layout_widthPercent="70%h"
             tools:ignore="ContentDescription" />
 
     </com.hiber.tools.layout.PercentLinearLayout>
+
+    <com.hiber.tools.layout.PercentRelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/ll_ice_merchant"
+        android:layout_toEndOf="@id/ll_ice_merchant"
+        android:background="@drawable/todo_list"
+        app:layout_heightPercent="60%h"
+        app:layout_marginStartPercent="1%w"
+        app:layout_widthPercent="25%w">
+
+        <!-- 清单 -->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv_ice_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_heightPercent="80%h" />
+
+        <!-- OK按钮 -->
+        <Button
+            android:id="@+id/bt_ice_shop_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/selector_main_goal_finish"
+            android:text="@string/wd_ok"
+            android:textColor="@color/common_colorText"
+            app:layout_heightPercent="12.9%h"
+            app:layout_marginPercent="4%w"
+            app:layout_textSizePercent="5%h"
+            app:layout_widthPercent="30%w" />
+
+    </com.hiber.tools.layout.PercentRelativeLayout>
+
+    <!-- 食物 + 售货员 -->
+    <com.hiber.tools.layout.PercentRelativeLayout
+        android:id="@+id/rl_ice_food_seller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/ll_ice_merchant"
+        app:layout_heightPercent="60%h">
+
+        <!-- 售货员 -->
+        <ImageView
+            android:id="@+id/iv_ice_seller"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/ll_ice_merchant"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/seller"
+            app:layout_marginStartPercent="3%w"
+            app:layout_widthPercent="24%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 鸡蛋1 -->
+        <ImageView
+            android:id="@+id/iv_ice_food_egg1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/food_ege"
+            android:tag="@string/common_ice_shop_egg"
+            app:layout_heightPercent="5.4%w"
+            app:layout_marginStartPercent="2.5%w"
+            app:layout_marginTopPercent="18%h"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 鸡蛋2 -->
+        <ImageView
+            android:id="@+id/iv_ice_food_egg2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/iv_ice_food_egg1"
+            android:src="@drawable/food_ege"
+            android:tag="@string/common_ice_shop_egg"
+            app:layout_heightPercent="5.4%w"
+            app:layout_marginStartPercent="0.5%w"
+            app:layout_marginTopPercent="18%h"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 鸡蛋3 -->
+        <ImageView
+            android:id="@+id/iv_ice_food_egg3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/iv_ice_food_egg2"
+            android:src="@drawable/food_ege"
+            android:tag="@string/common_ice_shop_egg"
+            app:layout_heightPercent="5.4%w"
+            app:layout_marginStartPercent="0.5%w"
+            app:layout_marginTopPercent="18%h"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 面粉1 -->
+        <ImageView
+            android:id="@+id/iv_ice_food_mianfen1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_food_egg1"
+            android:layout_alignStart="@id/iv_ice_food_egg1"
+            android:src="@drawable/food_mianfen"
+            android:tag="@string/common_ice_shop_mianfen"
+            app:layout_heightPercent="5.4%w"
+            app:layout_marginTopPercent="14%h"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 面粉2 -->
+        <ImageView
+            android:id="@+id/iv_ice_food_mianfen2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_food_egg2"
+            android:layout_alignStart="@id/iv_ice_food_egg2"
+            android:layout_alignTop="@id/iv_ice_food_mianfen1"
+            android:layout_alignBottom="@id/iv_ice_food_mianfen1"
+            android:src="@drawable/food_mianfen"
+            android:tag="@string/common_ice_shop_mianfen"
+            app:layout_heightPercent="5.4%w"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 面粉3 -->
+        <ImageView
+            android:id="@+id/iv_ice_food_mianfen3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_food_egg3"
+            android:layout_alignStart="@id/iv_ice_food_egg3"
+            android:layout_alignTop="@id/iv_ice_food_mianfen2"
+            android:layout_alignBottom="@id/iv_ice_food_mianfen2"
+            android:src="@drawable/food_mianfen"
+            android:tag="@string/common_ice_shop_mianfen"
+            app:layout_heightPercent="5.4%w"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 酸奶1 -->
+        <ImageView
+            android:id="@+id/iv_ice_food_suannai1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_food_mianfen1"
+            android:layout_alignStart="@id/iv_ice_food_egg1"
+            android:src="@drawable/food_milk"
+            android:tag="@string/common_ice_shop_suannai"
+            app:layout_heightPercent="5.4%w"
+            app:layout_marginTopPercent="14%h"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 酸奶2 -->
+        <ImageView
+            android:id="@+id/iv_ice_food_suannai2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_food_mianfen2"
+            android:layout_alignStart="@id/iv_ice_food_egg2"
+            android:layout_alignTop="@id/iv_ice_food_suannai1"
+            android:layout_alignBottom="@id/iv_ice_food_suannai1"
+            android:src="@drawable/food_milk"
+            android:tag="@string/common_ice_shop_suannai"
+            app:layout_heightPercent="5.4%w"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 酸奶3 -->
+        <ImageView
+            android:id="@+id/iv_ice_food_suannai3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_food_mianfen3"
+            android:layout_alignStart="@id/iv_ice_food_egg3"
+            android:layout_alignTop="@id/iv_ice_food_suannai2"
+            android:layout_alignBottom="@id/iv_ice_food_suannai2"
+            android:src="@drawable/food_milk"
+            android:tag="@string/common_ice_shop_suannai"
+            app:layout_heightPercent="5.4%w"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 奶酪1 -->
+        <ImageView
+            android:id="@+id/iv_ice_nailao1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/food_nailao"
+            android:tag="@string/common_ice_shop_nailao"
+            app:layout_heightPercent="5.5%w"
+            app:layout_marginStartPercent="28%w"
+            app:layout_marginTopPercent="6%h"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 奶酪2 -->
+        <ImageView
+            android:id="@+id/iv_ice_nailao2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_ice_nailao1"
+            android:layout_toEndOf="@id/iv_ice_nailao1"
+            android:src="@drawable/food_nailao"
+            android:tag="@string/common_ice_shop_nailao"
+            app:layout_heightPercent="5.5%w"
+            app:layout_marginStartPercent="1%w"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 奶酪3 -->
+        <ImageView
+            android:id="@+id/iv_ice_nailao3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_ice_nailao2"
+            android:layout_toEndOf="@id/iv_ice_nailao2"
+            android:src="@drawable/food_nailao"
+            android:tag="@string/common_ice_shop_nailao"
+            app:layout_heightPercent="5.5%w"
+            app:layout_marginStartPercent="1%w"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 牛奶: milk2_1 -->
+        <ImageView
+            android:id="@+id/iv_ice_milk2_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_nailao1"
+            android:layout_alignStart="@id/iv_ice_nailao1"
+            android:src="@drawable/food_milk2"
+            android:tag="@string/common_ice_shop_milk2"
+            app:layout_heightPercent="5.5%w"
+            app:layout_marginTopPercent="5%h"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 牛奶: milk2_2 -->
+        <ImageView
+            android:id="@+id/iv_ice_milk2_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_nailao2"
+            android:layout_alignStart="@id/iv_ice_nailao2"
+            android:layout_alignTop="@id/iv_ice_milk2_1"
+            android:layout_alignBottom="@id/iv_ice_milk2_1"
+            android:src="@drawable/food_milk2"
+            android:tag="@string/common_ice_shop_milk2"
+            app:layout_heightPercent="5.5%w"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 牛奶: milk2_3 -->
+        <ImageView
+            android:id="@+id/iv_ice_milk2_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_nailao3"
+            android:layout_alignStart="@id/iv_ice_nailao3"
+            android:layout_alignTop="@id/iv_ice_milk2_2"
+            android:layout_alignBottom="@id/iv_ice_milk2_2"
+            android:src="@drawable/food_milk2"
+            android:tag="@string/common_ice_shop_milk2"
+            app:layout_heightPercent="5.5%w"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 牛奶: milk3 -->
+        <ImageView
+            android:id="@+id/iv_ice_milk3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_milk2_1"
+            android:layout_alignStart="@id/iv_ice_nailao1"
+            android:src="@drawable/food_milk3"
+            android:tag="@string/common_ice_shop_milk3"
+            app:layout_heightPercent="5.5%w"
+            app:layout_marginTopPercent="6%h"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 牛奶: milk4 -->
+        <ImageView
+            android:id="@+id/iv_ice_milk4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_milk2_2"
+            android:layout_alignStart="@id/iv_ice_milk2_2"
+            android:layout_alignTop="@id/iv_ice_milk3"
+            android:layout_alignBottom="@id/iv_ice_milk3"
+            android:src="@drawable/food_milk4"
+            android:tag="@string/common_ice_shop_milk4"
+            app:layout_heightPercent="5.5%w"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 牛奶: milk5 -->
+        <ImageView
+            android:id="@+id/iv_ice_milk5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_milk2_3"
+            android:layout_alignStart="@id/iv_ice_milk2_3"
+            android:layout_alignTop="@id/iv_ice_milk4"
+            android:layout_alignBottom="@id/iv_ice_milk4"
+            android:src="@drawable/food_milk5"
+            android:tag="@string/common_ice_shop_milk5"
+            app:layout_heightPercent="5.5%w"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 牛奶: milk6 -->
+        <ImageView
+            android:id="@+id/iv_ice_milk6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_milk3"
+            android:layout_alignStart="@id/iv_ice_milk3"
+            android:src="@drawable/food_milk6"
+            android:tag="@string/common_ice_shop_milk6"
+            app:layout_heightPercent="5.5%w"
+            app:layout_marginTopPercent="6%h"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 牛奶: milk7 -->
+        <ImageView
+            android:id="@+id/iv_ice_milk7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_milk4"
+            android:layout_alignStart="@id/iv_ice_milk4"
+            android:layout_alignTop="@id/iv_ice_milk6"
+            android:layout_alignBottom="@id/iv_ice_milk6"
+            android:src="@drawable/food_milk7"
+            android:tag="@string/common_ice_shop_milk7"
+            app:layout_heightPercent="5.5%w"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+        <!-- 牛奶: milk8 -->
+        <ImageView
+            android:id="@+id/iv_ice_milk8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_ice_milk5"
+            android:layout_alignStart="@id/iv_ice_milk5"
+            android:layout_alignTop="@id/iv_ice_milk7"
+            android:layout_alignBottom="@id/iv_ice_milk7"
+            android:src="@drawable/food_milk8"
+            android:tag="@string/common_ice_shop_milk8"
+            app:layout_heightPercent="5.5%w"
+            app:layout_widthPercent="5.5%w"
+            tools:ignore="ContentDescription" />
+
+    </com.hiber.tools.layout.PercentRelativeLayout>
 
 </com.hiber.tools.layout.PercentRelativeLayout>

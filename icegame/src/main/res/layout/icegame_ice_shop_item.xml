@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hiber.tools.layout.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!-- 图标 -->
+    <ImageView
+        android:id="@+id/iv_ice_shop_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/food_milk3"
+        app:layout_heightPercent="5%sh"
+        app:layout_marginTopPercent="2%sh"
+        app:layout_widthPercent="5%sh"
+        tools:ignore="ContentDescription" />
+
+    <!-- 标题 -->
+    <TextView
+        android:id="@+id/tv_ice_shop_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/iv_ice_shop_item"
+        android:layout_toEndOf="@id/iv_ice_shop_item"
+        android:gravity="center"
+        android:text="milk"
+        android:textColor="@color/common_colorText"
+        app:layout_heightPercent="5%sh"
+        app:layout_marginStartPercent="5%w"
+        app:layout_textSizePercent="4%sh"
+        tools:ignore="HardcodedText" />
+
+</com.hiber.tools.layout.PercentRelativeLayout>
