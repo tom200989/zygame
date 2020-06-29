@@ -21,6 +21,7 @@ public class RootComponent {
     public static String ICE_AC = "com.zygame.icegame.ue.activity.IceActivity";
     public static String FRAG_ICE = "com.zygame.icegame.ue.frag.Frag_ice";
     public static String FRAG_ICE_SHOP = "com.zygame.icegame.ue.frag.Frag_ice_shop";
+    public static String FRAG_ICE_WORK = "com.zygame.icegame.ue.frag.Frag_ice_work";
 
     public static String SP_NAME = "ZYApp";// sp文件名
     public static String PREVENTION_TIME = "PREVENTION_TIME";// 防沉迷标记 (Value为json)

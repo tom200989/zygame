@@ -6,12 +6,14 @@ import com.zygame.icegame.BuildConfig;
 import com.zygame.icegame.R;
 import com.zygame.icegame.ue.frag.Frag_ice;
 import com.zygame.icegame.ue.frag.Frag_ice_shop;
+import com.zygame.icegame.ue.frag.Frag_ice_work;
 
 public class IceActivity extends RootMAActivity {
 
-    private Class[] frags = {
-            Frag_ice_shop.class , // 雪糕起始页
-            Frag_ice.class , // 雪糕起始页
+    private Class[] frags = {// 
+            Frag_ice_work.class, // 雪糕制作页
+            Frag_ice_shop.class, // 雪糕起始页
+            Frag_ice.class, // 雪糕起始页
     };
 
     @Override

@@ -2,10 +2,12 @@ package com.zygame.icegame.bean;
 
 import android.widget.ImageView;
 
+import java.io.Serializable;
+
 /*
  * Created by Administrator on 2020/6/9.
  */
-public class IceShopBean {
+public class IceShopBean implements Serializable {
 
     private ImageView ivFood;// 食物图标
     private String foodTitle;// 食物标题

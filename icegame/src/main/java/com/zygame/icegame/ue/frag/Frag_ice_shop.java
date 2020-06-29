@@ -149,11 +149,11 @@ public class Frag_ice_shop extends RootFrag {
         rcvIceOrder.setAdapter(shopadapter);
         // 设置点击OK监听
         btOk.setOnClickListener(v -> {
-            // TODO: 2020/6/9  跳转到下一个页面
             if (foodls.size() <= 0) {
                 toast(R.string.common_ice_shop_tip, 6000);
             } else {
-                // TODO: 2020/6/9  
+                // TODO: 2020/6/9  跳转到下一个页面 - 并把选中的材料发送过去
+                toFrag(getClass(), Frag_ice_work.class, foodls, true);
             }
         });
     }

@@ -6,4 +6,5 @@
     <color name="common_colorEditHit">@android:color/darker_gray</color>
     <color name="common_colorWave">#014961</color>
     <color name="common_colorYugou">#FFFFFF</color>
+    <color name="common_colorIceWork">#8FC7C6</color>
 </resources>
