@@ -3,10 +3,315 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
-    
-    
-    
+    android:layout_height="match_parent"
+    android:background="@drawable/ice_cookie_wall"
+    tools:ignore="ContentDescription">
+
+    <!-- 底座 -->
+    <ImageView
+        android:id="@+id/ice_cookie_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_pan_bottom"
+        app:layout_heightPercent="2%h"
+        app:layout_widthPercent="82%w" />
+
+    <!-- 消毒柜 框 -->
+    <ImageView
+        android:id="@+id/ice_cookie_bbq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_bbq_0rec"
+        app:layout_heightPercent="25%h"
+        app:layout_widthPercent="25.5%h" />
+
+    <!-- 消毒柜 门 -->
+    <ImageView
+        android:id="@+id/ice_cookie_bbq_door"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_bbq_1door"
+        app:layout_heightPercent="25%h"
+        app:layout_widthPercent="25.5%h" />
+
+    <!-- 消毒柜 玻璃 -->
+    <ImageView
+        android:id="@+id/ice_cookie_bbq_glass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_bbq_2glass"
+        app:layout_heightPercent="25%h"
+        app:layout_widthPercent="25.5%h" />
+
+    <!-- 柜子3 close -->
+    <ImageView
+        android:id="@+id/ice_cookie_leftdoor3_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_toStartOf="@id/ice_cookie_bbq"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_leftdoor3_close"
+        app:layout_heightPercent="25%h"
+        app:layout_widthPercent="12.62%h" />
+
+    <!-- 柜子3 open -->
+    <ImageView
+        android:id="@+id/ice_cookie_leftdoor3_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_toStartOf="@id/ice_cookie_bbq"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_leftdoor3_open"
+        android:visibility="invisible"
+        app:layout_heightPercent="25%h"
+        app:layout_widthPercent="12.62%h" />
+
+    <!-- 柜子2 close -->
+    <ImageView
+        android:id="@+id/ice_cookie_leftdoor2_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_toStartOf="@id/ice_cookie_leftdoor3_close"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_leftdoor2_close"
+        app:layout_heightPercent="25%h"
+        app:layout_widthPercent="19.67%h" />
+
+    <!-- 柜子2 open -->
+    <ImageView
+        android:id="@+id/ice_cookie_leftdoor2_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_toStartOf="@id/ice_cookie_leftdoor3_close"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_leftdoor2_open"
+        android:visibility="invisible"
+        app:layout_heightPercent="25%h"
+        app:layout_widthPercent="19.67%h" />
+
+    <!-- 柜子1 close -->
+    <ImageView
+        android:id="@+id/ice_cookie_leftdoor1_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_toStartOf="@id/ice_cookie_leftdoor2_close"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_leftdoor1_close"
+        app:layout_heightPercent="25%h"
+        app:layout_widthPercent="19.67%h" />
+
+    <!-- 柜子1 open -->
+    <ImageView
+        android:id="@+id/ice_cookie_leftdoor1_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_toStartOf="@id/ice_cookie_leftdoor2_close"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_leftdoor1_open"
+        android:visibility="invisible"
+        app:layout_heightPercent="25%h"
+        app:layout_widthPercent="19.67%h" />
+
+    <!-- 柜子 -1 close -->
+    <ImageView
+        android:id="@+id/ice_cookie_rightdoor1_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_toEndOf="@id/ice_cookie_bbq"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_rightdoor1_close"
+        app:layout_heightPercent="25%h"
+        app:layout_widthPercent="22.9%h" />
+
+    <!-- 柜子 -1 open -->
+    <ImageView
+        android:id="@+id/ice_cookie_rightdoor1_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_toEndOf="@id/ice_cookie_bbq"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_rightdoor1_open"
+        android:visibility="invisible"
+        app:layout_heightPercent="25%h"
+        app:layout_widthPercent="22.9%h" />
+
+    <!-- 柜子 -2 close -->
+    <ImageView
+        android:id="@+id/ice_cookie_rightdoor2_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_toEndOf="@id/ice_cookie_rightdoor1_close"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_rightdoor2_close"
+        app:layout_heightPercent="12.5%h"
+        app:layout_widthPercent="17.66%h" />
+
+    <!-- 柜子 -2 open -->
+    <ImageView
+        android:id="@+id/ice_cookie_rightdoor2_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_toEndOf="@id/ice_cookie_rightdoor1_close"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_rightdoor2_open"
+        android:visibility="invisible"
+        app:layout_heightPercent="12.5%h"
+        app:layout_widthPercent="17.66%h" />
+
+    <!-- 柜子 -3 close -->
+    <ImageView
+        android:id="@+id/ice_cookie_rightdoor3_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_rightdoor2_close"
+        android:layout_toEndOf="@id/ice_cookie_rightdoor1_close"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_rightdoor3_close"
+        app:layout_heightPercent="12.5%h"
+        app:layout_widthPercent="17.66%h" />
+
+    <!-- 柜子 -3 open -->
+    <ImageView
+        android:id="@+id/ice_cookie_rightdoor3_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_rightdoor2_close"
+        android:layout_toEndOf="@id/ice_cookie_rightdoor1_close"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_rightdoor3_open"
+        android:visibility="invisible"
+        app:layout_heightPercent="12.5%h"
+        app:layout_widthPercent="17.66%h" />
+
+    <!-- 水龙头灶台 -->
+    <ImageView
+        android:id="@+id/ice_cookie_rightdesk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bottom"
+        android:layout_toEndOf="@id/ice_cookie_rightdoor2_close"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_rightdesk"
+        app:layout_heightPercent="25%h"
+        app:layout_widthPercent="12%h" />
+
+    <!-- 顶面 -->
+    <ImageView
+        android:id="@+id/ice_cookie_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_bbq"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_pan_top"
+        app:layout_heightPercent="2%h"
+        app:layout_widthPercent="83%w" />
+
+    <!-- 水龙头 -->
+    <ImageView
+        android:id="@+id/ice_cookie_rightdesk_water"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_top"
+        android:layout_alignEnd="@id/ice_cookie_rightdesk"
+        android:scaleType="fitXY"
+        android:src="@drawable/ice_rightdesk_water"
+        app:layout_heightPercent="14%h"
+        app:layout_widthPercent="15.27%h" />
+
+    <!-- 煤气炉 -->
+    <com.hiber.tools.layout.PercentRelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ice_cookie_top"
+        android:layout_centerHorizontal="true"
+        app:layout_heightPercent="8%h"
+        app:layout_widthPercent="28.78%h">
+
+        <!-- 气炉 -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/ice_gas_furnace" />
+
+        <!-- 按钮 -->
+        <com.hiber.tools.layout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ice_cookie_gas_btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ice_gas_furnace_btn"
+                app:layout_heightPercent="30%h"
+                app:layout_marginEndPercent="10%w"
+                app:layout_widthPercent="30%h" />
+
+            <ImageView
+                android:id="@+id/ice_cookie_gas_btn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ice_gas_furnace_btn"
+                app:layout_heightPercent="30%h"
+                app:layout_marginEndPercent="10%w"
+                app:layout_widthPercent="30%h" />
+
+            <ImageView
+                android:id="@+id/ice_cookie_gas_btn3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ice_gas_furnace_btn"
+                app:layout_heightPercent="30%h"
+                app:layout_marginEndPercent="10%w"
+                app:layout_widthPercent="30%h" />
+
+            <ImageView
+                android:id="@+id/ice_cookie_gas_btn4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ice_gas_furnace_btn"
+                app:layout_heightPercent="30%h"
+                app:layout_marginEndPercent="10%w"
+                app:layout_widthPercent="30%h" />
+
+            <ImageView
+                android:id="@+id/ice_cookie_gas_btn5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ice_gas_furnace_btn"
+                app:layout_heightPercent="30%h"
+                app:layout_widthPercent="30%h" />
+
+        </com.hiber.tools.layout.PercentLinearLayout>
+
+    </com.hiber.tools.layout.PercentRelativeLayout>
 
 </com.hiber.tools.layout.PercentRelativeLayout>
