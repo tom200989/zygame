@@ -24,6 +24,7 @@ import android.widget.ImageView;
  * Created by fanrunqi on 2016/7/6.
  */
 @SuppressLint({"AppCompatCustomView", "HandlerLeak"})
+@SuppressWarnings(value = {"deprecation"})
 public class WaterWidget extends ImageView {
 
     /*

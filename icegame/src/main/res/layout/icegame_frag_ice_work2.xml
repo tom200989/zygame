@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hiber.tools.layout.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription,Autofill,LabelFor,HardcodedText">
+
+    <!-- 背景 -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:alpha="0.2"
+        android:src="@drawable/ice_cookie_room" />
+
+    <!-- 雪糕机 -->
+    <com.hiber.tools.layout.PercentRelativeLayout
+        android:id="@+id/rl_ice_machine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/ice_machine"
+        app:layout_heightPercent="40%w"
+        app:layout_widthPercent="30%w">
+
+        <!-- 雪糕流 -->
+        <ImageView
+            android:id="@+id/iv_ice_cup_stream"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ice_cup_stream"
+            android:visibility="gone"
+            app:layout_heightPercent="60%h" />
+
+        <!-- 雪糕筒 -->
+        <ImageView
+            android:id="@+id/iv_ice_cup_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ice_cup_bottom"
+            app:layout_heightPercent="42%w"
+            app:layout_widthPercent="30%w" />
+
+        <!-- 雪糕头 -->
+        <ImageView
+            android:id="@+id/iv_ice_cup_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/iv_ice_cup_bottom"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ice_cup_top"
+            android:visibility="gone"
+            app:layout_heightPercent="26%w"
+            app:layout_widthPercent="35%w" />
+
+    </com.hiber.tools.layout.PercentRelativeLayout>
+
+    <!-- 菜篮列表 -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv_ice_work2_list"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_marginPercent="3%w"
+        app:layout_widthPercent="40%w" />
+
+</com.hiber.tools.layout.PercentRelativeLayout>

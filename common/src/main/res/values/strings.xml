@@ -23,4 +23,6 @@
     <string name="common_ice_shop_milk7">巧克力牛奶</string>
     <string name="common_ice_shop_milk8">小鸟牛奶</string>
     <string name="common_ice_shop_tip">你还没有买材料噢</string>
+    <string name="common_ice_work_tip">你还没放完全部材料噢</string>
+    <string name="common_ice_work_finish">雪糕制作完成</string>
 </resources>

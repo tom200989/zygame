@@ -153,7 +153,8 @@ public class Frag_ice_shop extends RootFrag {
                 toast(R.string.common_ice_shop_tip, 6000);
             } else {
                 // TODO: 2020/6/9  跳转到下一个页面 - 并把选中的材料发送过去
-                toFrag(getClass(), Frag_ice_work.class, foodls, true);
+                // toFrag(getClass(), Frag_ice_work.class, foodls, true);
+                toFrag(getClass(), Frag_ice_work2.class, foodls, true);
             }
         });
     }

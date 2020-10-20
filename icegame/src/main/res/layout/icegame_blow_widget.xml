@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hiber.tools.layout.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:ignore="ContentDescription">
+
+    <com.hiber.tools.layout.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- 气泡1 -->
+        <ImageView
+            android:id="@+id/blow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/blow_default"
+            android:visibility="gone"
+            app:layout_heightPercent="25%h"
+            app:layout_marginStartPercent="30%w"
+            app:layout_widthPercent="25%h" />
+
+        <!-- 气泡2 -->
+        <ImageView
+            android:id="@+id/blow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/blow_default"
+            android:visibility="gone"
+            app:layout_heightPercent="25%h"
+            app:layout_marginTopPercent="30%h"
+            app:layout_widthPercent="25%h" />
+
+        <!-- 气泡3 -->
+        <ImageView
+            android:id="@+id/blow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/blow_default"
+            android:visibility="gone"
+            app:layout_heightPercent="25%h"
+            app:layout_marginTopPercent="40%h"
+            app:layout_widthPercent="25%h" />
+
+        <!-- 气泡4 -->
+        <ImageView
+            android:id="@+id/blow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/blow_default"
+            android:visibility="gone"
+            app:layout_heightPercent="25%h"
+            app:layout_marginStartPercent="10%w"
+            app:layout_marginTopPercent="65%h"
+            app:layout_widthPercent="25%h" />
+
+        <!-- 气泡5 -->
+        <ImageView
+            android:id="@+id/blow5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/blow_default"
+            android:visibility="gone"
+            app:layout_heightPercent="25%h"
+            app:layout_marginStartPercent="50%w"
+            app:layout_marginTopPercent="70%h"
+            app:layout_widthPercent="25%h" />
+
+        <!-- 气泡6 -->
+        <ImageView
+            android:id="@+id/blow6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/blow_default"
+            android:visibility="gone"
+            app:layout_heightPercent="25%h"
+            app:layout_widthPercent="25%h" />
+
+        <!-- 气泡7 -->
+        <ImageView
+            android:id="@+id/blow7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/blow_default"
+            android:visibility="gone"
+            app:layout_heightPercent="25%h"
+            app:layout_marginEndPercent="10%w"
+            app:layout_marginTopPercent="10%h"
+            app:layout_widthPercent="25%h" />
+
+    </com.hiber.tools.layout.PercentRelativeLayout>
+
+</com.hiber.tools.layout.PercentRelativeLayout>

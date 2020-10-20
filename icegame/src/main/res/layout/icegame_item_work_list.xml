@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hiber.tools.layout.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="ContentDescription,Autofill,LabelFor,HardcodedText">
+
+    <com.hiber.tools.layout.PercentRelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:layout_widthPercent="15%sw">
+
+        <!-- 按钮背景 + 菜图片 -->
+        <com.hiber.tools.layout.PercentRelativeLayout
+            android:id="@+id/rl_ice_item_btn_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_rec_unpressed"
+            app:layout_heightPercent="15%sw">
+
+            <!-- 菜图片容器 -->
+            <ImageView
+                android:id="@+id/iv_ice_item_btn_foodPic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:layout_heightPercent="65%w"
+                app:layout_widthPercent="65%w" />
+
+            <!-- 气泡效果 -->
+            <com.zygame.icegame.widget.BlowWidget
+                android:id="@+id/bw_ice_effect"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+        </com.hiber.tools.layout.PercentRelativeLayout>
+
+        <!-- 菜名 -->
+        <TextView
+            android:id="@+id/tv_ice_item_foodTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_ice_item_btn_bg"
+            android:layout_centerHorizontal="true"
+            android:text="Order"
+            android:textColor="@color/common_colorText"
+            app:layout_marginBottomPercent="3%sh"
+            app:layout_marginTopPercent="2%h"
+            app:layout_textSizePercent="3%sh" />
+
+    </com.hiber.tools.layout.PercentRelativeLayout>
+
+</com.hiber.tools.layout.PercentRelativeLayout>
