@@ -25,4 +25,14 @@
     <string name="common_ice_shop_tip">你还没有买材料噢</string>
     <string name="common_ice_work_tip">你还没放完全部材料噢</string>
     <string name="common_ice_work_finish">雪糕制作完成</string>
+    <string name="common_ice_style_finish">完成</string>
+    <string name="common_ice_style_tip">你还没选雪糕图案噢</string>
+    <string name="common_ice_style_title1">雪糕花</string>
+    <string name="common_ice_style_title2">巧克力</string>
+    <string name="common_ice_style_title3">奶油</string>
+    <string name="common_ice_style_title4">雪糕筒</string>
+    <string name="common_ice_style_title5">雪糕带</string>
+    <string name="common_ice_style_title6">雪糕边</string>
+    <string name="common_ice_style_title7">雪糕线</string>
+    
 </resources>

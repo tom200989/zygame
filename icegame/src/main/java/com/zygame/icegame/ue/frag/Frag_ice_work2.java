@@ -97,7 +97,8 @@ public class Frag_ice_work2 extends RootFrag {
             @Override
             public void onAnimationEnd(Animation animation) {
                 toast(R.string.common_ice_work_finish, 3000);
-                // TODO: 2020/10/020 跳转到下一个页面
+                // 跳转到下一个页面
+                toFrag(getClass(), Frag_ice_style.class, null, true);
             }
 
             @Override

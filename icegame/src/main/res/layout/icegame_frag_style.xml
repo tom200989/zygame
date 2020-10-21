@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hiber.tools.layout.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription,Autofill,LabelFor,HardcodedText">
+
+    <!-- 背景 -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.4"
+        android:background="@drawable/ice_bbq" />
+
+    <!-- 雪糕容器 -->
+    <com.hiber.tools.layout.PercentRelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:layout_heightPercent="45%w"
+        app:layout_widthPercent="25%w">
+
+        <ImageView
+            android:id="@+id/iv_ice_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ice_decorate_1" />
+
+        <ImageView
+            android:id="@+id/iv_ice_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ice_decorate_2" />
+
+        <ImageView
+            android:id="@+id/iv_ice_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ice_decorate_3" />
+
+        <ImageView
+            android:id="@+id/iv_ice_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ice_decorate_4" />
+
+        <ImageView
+            android:id="@+id/iv_ice_5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ice_decorate_5" />
+
+        <ImageView
+            android:id="@+id/iv_ice_6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ice_decorate_6" />
+
+        <ImageView
+            android:id="@+id/iv_ice_7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ice_decorate_7" />
+
+    </com.hiber.tools.layout.PercentRelativeLayout>
+
+    <!-- 按钮 -->
+    <Button
+        android:id="@+id/bt_ice_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/selector_main_goal_finish"
+        android:text="@string/common_ice_style_finish"
+        android:textColor="@color/common_colorEditHit"
+        app:layout_heightPercent="10%h"
+        app:layout_widthPercent="15%w" />
+
+    <!-- 样式列表 -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv_ice_style"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_widthPercent="25%w" />
+
+    <!-- 颜色列表 -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv_ice_color"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        app:layout_widthPercent="25%w" />
+
+</com.hiber.tools.layout.PercentRelativeLayout>

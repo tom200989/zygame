@@ -7,4 +7,18 @@
     <color name="common_colorWave">#014961</color>
     <color name="common_colorYugou">#FFFFFF</color>
     <color name="common_colorIceWork">#8FC7C6</color>
+
+    <color name="common_colorIce_00C6FF">#00C6FF</color>
+    <color name="common_colorIce_00FFE4">#00FFE4</color>
+    <color name="common_colorIce_06FF00">#06FF00</color>
+    <color name="common_colorIce_0084FF">#0084FF</color>
+    <color name="common_colorIce_7800FF">#7800FF</color>
+    <color name="common_colorIce_A8FF00">#A8FF00</color>
+    <color name="common_colorIce_A65757">#A65757</color>
+    <color name="common_colorIce_C600FF">#C600FF</color>
+    <color name="common_colorIce_FEFF80">#FEFF80</color>
+    <color name="common_colorIce_FF9C9C">#FF9C9C</color>
+    <color name="common_colorIce_FF6600">#FF6600</color>
+    <color name="common_colorIce_FFA86E">#FFA86E</color>
+
 </resources>

@@ -54,6 +54,7 @@ public class IceWork2Adapter extends RecyclerView.Adapter<IceWork2Holder> {
         // 绑定
         tvOrderName.setText(foodTitle);// 菜名
         ivFoodPic.setImageDrawable(drawPic);
+
         // 点击
         ivFoodPic.setOnClickListener(v -> {
             bwEffect.setVisibility(View.VISIBLE);// 显示特效

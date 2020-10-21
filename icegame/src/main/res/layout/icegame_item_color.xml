@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hiber.tools.layout.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="ContentDescription,Autofill,LabelFor,HardcodedText">
+
+    <com.hiber.tools.layout.PercentRelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:layout_marginBottomPercent="2%sh"
+        app:layout_widthPercent="15%sw">
+
+        <!-- 按钮背景 + 样式图片 -->
+        <com.hiber.tools.layout.PercentRelativeLayout
+            android:id="@+id/rl_ice_color_item_btn_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_rec_unpressed"
+            app:layout_heightPercent="15%sw">
+
+            <!-- 样式图片容器 -->
+            <ImageView
+                android:id="@+id/iv_ice_color_item_btn_stylePic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:layout_heightPercent="65%w"
+                app:layout_widthPercent="65%w" />
+
+            <!-- 气泡效果 -->
+            <com.zygame.icegame.widget.BlowWidget
+                android:id="@+id/bw_ice_color_effect"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+        </com.hiber.tools.layout.PercentRelativeLayout>
+
+    </com.hiber.tools.layout.PercentRelativeLayout>
+
+</com.hiber.tools.layout.PercentRelativeLayout>
