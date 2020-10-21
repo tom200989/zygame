@@ -12,8 +12,8 @@ public class SplashActivity extends RootMAActivity {
 
     private Class[] frags = {// 
             // Frag_astart.class, //调试页
-            Frag_main.class, // 主页
             Frag_splash.class,// 启动页
+            Frag_main.class, // 主页
             Frag_setting.class,// 设置页
     };
 

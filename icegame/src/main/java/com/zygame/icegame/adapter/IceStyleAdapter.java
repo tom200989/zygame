@@ -77,8 +77,8 @@ public class IceStyleAdapter extends RecyclerView.Adapter<IceStyleHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull IceStyleHolder holder, int i) {
-        IceStyleBean iceStyleBean = styleBeans.get(i);
+    public void onBindViewHolder(@NonNull IceStyleHolder holder, int position) {
+        IceStyleBean iceStyleBean = styleBeans.get(position);
         ImageView ivStylePic = holder.ivStylePic;
         ImageView ivAlpha = holder.ivAlpha;
         BlowWidget bwEffect = holder.bwStyle;
@@ -92,12 +92,16 @@ public class IceStyleAdapter extends RecyclerView.Adapter<IceStyleHolder> {
             bwEffect.setVisibility(View.VISIBLE);
             bwEffect.activite();// 显示气泡
             // 选中并刷新
-            for (int i1 = 0; i1 < styleBeans.size(); i1++) {
-                styleBeans.get(i1).setSelected(i1 == i);
+            for (int i = 0; i < styleBeans.size(); i++) {
+                styleBeans.get(i).setSelected(i == position);
             }
-            notifys();
-            ClickStyelItemNext(i);
-            new Handler().postDelayed(() -> bwEffect.setVisibility(View.GONE), 700);
+            ClickStyelItemNext(position);
+            new Handler().postDelayed(() -> {
+                bwEffect.setVisibility(View.GONE);
+                notifys();
+            }, 700);
+
+
         });
     }
 
