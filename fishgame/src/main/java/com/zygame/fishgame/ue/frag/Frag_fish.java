@@ -218,7 +218,7 @@ public class Frag_fish extends RootFrag {
         // 跳转
         toFragModule(getClass(), RootComponent.SPLASH_AC, RootComponent.FRAG_MAIN, null, false, getClass());
     }
-    
+
 
     @Override
     public void onPause() {
@@ -233,10 +233,14 @@ public class Frag_fish extends RootFrag {
      */
     private void stopvoice() {
         if (bgVoice != null) {
-            bgVoice.stop();
+            bgVoice.reset();
+            bgVoice.release();
+            bgVoice = null;
         }
         if (fishVoice != null) {
-            fishVoice.stop();
+            fishVoice.reset();
+            fishVoice.release();
+            fishVoice = null;
         }
     }
 
@@ -428,6 +432,7 @@ public class Frag_fish extends RootFrag {
      * 启动小鱼音频
      */
     private MediaPlayer getFishVoice(boolean isDefaultStart) {
+        releaseVoice();
         if (fishVoice == null) {
             fishVoice = MediaPlayer.create(activity, R.raw.fish_get);
         }
@@ -441,6 +446,15 @@ public class Frag_fish extends RootFrag {
         }
         return fishVoice;
     }
+
+    public void releaseVoice() {
+        if (fishVoice != null) {
+            fishVoice.reset();
+            fishVoice.release();
+            fishVoice = null;
+        }
+    }
+
 
     /* -------------------------------------------- thread -------------------------------------------- */
 

@@ -15,6 +15,7 @@ import com.zygame.icegame.R;
 import com.zygame.icegame.R2;
 import com.zygame.icegame.adapter.IceWork2Adapter;
 import com.zygame.icegame.bean.IceShopBean;
+import com.zygame.icegame.utils.ActionVoiceUtils;
 
 import java.util.List;
 
@@ -97,6 +98,8 @@ public class Frag_ice_work2 extends RootFrag {
             @Override
             public void onAnimationEnd(Animation animation) {
                 toast(R.string.common_ice_work_finish, 3000);
+                // 释放音频 - 一定要做, 否则出bug
+                ActionVoiceUtils.releaseVoice();
                 // 跳转到下一个页面
                 toFrag(getClass(), Frag_ice_style.class, null, true);
             }
@@ -113,6 +116,9 @@ public class Frag_ice_work2 extends RootFrag {
      */
     private void initRcv() {
         adapter = new IceWork2Adapter(activity, iceShopBeans);
+        adapter.setOnClickOrderItemListener(() -> {
+            ActionVoiceUtils.play(activity, R.raw.action_voice);// 播放音频
+        });
         LinearLayoutManager lm = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
         rcvIceWork2List.setLayoutManager(lm);
         rcvIceWork2List.setAdapter(adapter);
@@ -120,6 +126,8 @@ public class Frag_ice_work2 extends RootFrag {
 
     @Override
     public boolean onBackPresss() {
+        // 释放音频 - 一定要做, 否则出bug
+        ActionVoiceUtils.releaseVoice();
         // 退回到主页
         toFragModule(getClass(), RootComponent.SPLASH_AC, RootComponent.FRAG_MAIN, null, true);
         return true;

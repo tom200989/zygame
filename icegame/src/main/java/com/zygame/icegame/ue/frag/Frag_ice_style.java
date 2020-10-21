@@ -13,6 +13,7 @@ import com.zygame.icegame.R;
 import com.zygame.icegame.R2;
 import com.zygame.icegame.adapter.IceColorAdapter;
 import com.zygame.icegame.adapter.IceStyleAdapter;
+import com.zygame.icegame.utils.ActionVoiceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import butterknife.BindView;
 /*
  * Created by Administrator on 2020/10/020.
  */
+@SuppressWarnings(value = {"unchecked", "deprecation"})
 public class Frag_ice_style extends RootFrag {
 
     @BindView(R2.id.iv_ice_1)
@@ -65,6 +67,7 @@ public class Frag_ice_style extends RootFrag {
         iceIvs.add(ivIce5);
         iceIvs.add(ivIce6);
         iceIvs.add(ivIce7);
+
     }
 
     @Override
@@ -72,7 +75,12 @@ public class Frag_ice_style extends RootFrag {
 
         // * 样式适配器
         iceStyleAdapter = new IceStyleAdapter(activity);
-        iceStyleAdapter.setOnClickStyelItemListener(position -> ivStyelTemp = iceIvs.get(position));// 临时样式存储
+        iceStyleAdapter.setOnClickStyelItemListener(position -> {
+            // 播放音频
+            ActionVoiceUtils.play(activity, R.raw.action_voice);
+            // 雪糕样式临时存储
+            ivStyelTemp = iceIvs.get(position);
+        });// 临时样式存储
         LinearLayoutManager styleLm = new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
         rcvIceStyle.setLayoutManager(styleLm);
         rcvIceStyle.setAdapter(iceStyleAdapter);
@@ -80,6 +88,8 @@ public class Frag_ice_style extends RootFrag {
         // * 颜色适配器
         iceColorAdapter = new IceColorAdapter(activity);
         iceColorAdapter.setOnClickColorItemListener(colorRes -> {
+            // 播放音频
+            ActionVoiceUtils.play(activity, R.raw.action_voice);
             // 修改雪糕样式渲染
             if (ivStyelTemp != null) {
                 ivStyelTemp.setImageTintList(ColorStateList.valueOf(colorRes));
@@ -102,6 +112,8 @@ public class Frag_ice_style extends RootFrag {
 
     @Override
     public boolean onBackPresss() {
+        // 释放音频
+        ActionVoiceUtils.releaseVoice();
         // 退回到主页
         toFragModule(getClass(), RootComponent.SPLASH_AC, RootComponent.FRAG_MAIN, null, true);
         return true;

@@ -88,14 +88,10 @@ public class Frag_main extends RootFrag {
             } else {// 当天没有超时 - 则再判断单次是否超时
                 toFragModule(getClass(), RootComponent.FISH_AC, RootComponent.FRAG_FISH, null, true);
             }
-
             // toFragModule(getClass(), RootComponent.FISH_AC, RootComponent.FRAG_FISH, null, true);
-
-
         });
         // 跳转到ICE
         ivMainIce.setOnClickListener(v -> toFragModule(getClass(), RootComponent.ICE_AC, RootComponent.FRAG_ICE, null, true));
-        // ivMainIce.setOnClickListener(v -> toast("阳阳雪糕店还没建好噢~", 5000));
     }
 
     @Override

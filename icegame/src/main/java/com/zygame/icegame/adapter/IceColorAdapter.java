@@ -1,6 +1,7 @@
 package com.zygame.icegame.adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ public class IceColorAdapter extends RecyclerView.Adapter<IcecColorHolder> {
     }
 
     private void initRes() {
+
         int[] ivRes = new int[]{// 颜色图片
                 R.drawable.ice_color_00c6ff,// 00c6ff
                 R.drawable.ice_color_00ffe4,// 00ffe4
@@ -86,11 +88,8 @@ public class IceColorAdapter extends RecyclerView.Adapter<IcecColorHolder> {
         ivStylePic.setOnClickListener(v -> {
             bwColor.setVisibility(View.VISIBLE);
             bwColor.activite();// 显示气泡
-            ivStylePic.postDelayed(() -> {
-                // 回调
-                ClickColorItemNext(context.getResources().getColor(iceColorBean.getColorRes()));
-                bwColor.setVisibility(View.GONE);
-            }, 200);
+            ClickColorItemNext(context.getResources().getColor(iceColorBean.getColorRes()));// 回调
+            new Handler().postDelayed(() -> bwColor.setVisibility(View.GONE), 700);
         });
     }
 

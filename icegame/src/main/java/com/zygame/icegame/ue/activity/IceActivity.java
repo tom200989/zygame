@@ -49,6 +49,7 @@ public class IceActivity extends RootMAActivity {
      * @param isDefaultStart 是否默认启动
      */
     private MediaPlayer getBgVoice(boolean isDefaultStart) {
+        releaseVoice();
         bgVoice = MediaPlayer.create(this, R.raw.merry_chrismas);
         bgVoice.setAudioStreamType(AudioManager.STREAM_MUSIC);
         bgVoice.setVolume(1, 1);
@@ -70,8 +71,15 @@ public class IceActivity extends RootMAActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        bgVoice.stop();
-        bgVoice = null;
+        releaseVoice();
+    }
+
+    public void releaseVoice() {
+        if (bgVoice != null) {
+            bgVoice.reset();
+            bgVoice.release();
+            bgVoice = null;
+        }
     }
 
     @Override

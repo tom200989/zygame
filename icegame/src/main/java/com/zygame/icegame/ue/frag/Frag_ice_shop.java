@@ -17,6 +17,7 @@ import com.zygame.icegame.R2;
 import com.zygame.icegame.adapter.IceShopAdapter;
 import com.zygame.icegame.bean.IceShopBean;
 import com.zygame.icegame.helper.FoodMoveHelper;
+import com.zygame.icegame.utils.ActionVoiceUtils;
 import com.zygame.icegame.utils.IceUtils;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import butterknife.BindView;
  * Created by Administrator on 2020/6/7.
  */
 @SuppressLint("ValidFragment")
+@SuppressWarnings(value = {"unchecked", "deprecation"})
 public class Frag_ice_shop extends RootFrag {
 
     @BindView(R2.id.ll_ice_merchant)
@@ -84,10 +86,10 @@ public class Frag_ice_shop extends RootFrag {
     @BindView(R2.id.iv_ice_milk8)
     ImageView ivIceMilk8;// 牛奶8
 
-    ImageView[] foodArr = {};// 存放imageview数组
-    List<IceShopBean> foodls = new ArrayList<>();// 食物集合1
-    HashMap<String, IceShopBean> foodms = new HashMap<>();// 食物集合2 - 用于传递给其他界面 (tag : imageview)
-    IceShopAdapter shopadapter;// 清单适配器
+    private ImageView[] foodArr = {};// 存放imageview数组
+    private List<IceShopBean> foodls = new ArrayList<>();// 食物集合1
+    private HashMap<String, IceShopBean> foodms = new HashMap<>();// 食物集合2 - 用于传递给其他界面 (tag : imageview)
+    private IceShopAdapter shopadapter;// 清单适配器
 
     @Override
     public int onInflateLayout() {
@@ -152,8 +154,9 @@ public class Frag_ice_shop extends RootFrag {
             if (foodls.size() <= 0) {
                 toast(R.string.common_ice_shop_tip, 6000);
             } else {
-                // TODO: 2020/6/9  跳转到下一个页面 - 并把选中的材料发送过去
-                // toFrag(getClass(), Frag_ice_work.class, foodls, true);
+                // 释放音频 - 一定要做, 否则出bug
+                ActionVoiceUtils.releaseVoice();
+                // 跳转到下一个页面 - 并把选中的材料发送过去
                 toFrag(getClass(), Frag_ice_work2.class, foodls, true);
             }
         });
@@ -192,6 +195,8 @@ public class Frag_ice_shop extends RootFrag {
                     // 父布局隐藏视图 (并且设置Enable为False以防止再次拖动)
                     iv.setVisibility(View.INVISIBLE);
                     iv.setEnabled(false);
+                    // 播放音效
+                    ActionVoiceUtils.play(activity, R.raw.action_voice);
                 } else {
                     // 恢复到原位
                     iv.setX(old_x2);
@@ -216,6 +221,7 @@ public class Frag_ice_shop extends RootFrag {
     @Override
     public boolean onBackPresss() {
         // 跳转回原来页面
+        ActionVoiceUtils.releaseVoice();
         toFragModule(getClass(), RootComponent.SPLASH_AC, RootComponent.FRAG_MAIN, null, false, getClass());
         return true;
     }

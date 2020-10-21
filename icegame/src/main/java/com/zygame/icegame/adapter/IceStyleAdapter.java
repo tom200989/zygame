@@ -1,6 +1,7 @@
 package com.zygame.icegame.adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import java.util.List;
 /*
  * Created by Administrator on 2020/10/020.
  */
+@SuppressWarnings(value = {"unchecked", "deprecation"})
 public class IceStyleAdapter extends RecyclerView.Adapter<IceStyleHolder> {
 
     private Context context;
@@ -33,6 +35,7 @@ public class IceStyleAdapter extends RecyclerView.Adapter<IceStyleHolder> {
      * 加载资源
      */
     private void initRes() {
+
         int[] ivs = new int[]{// 样式图片
                 R.drawable.ice_decorate_1_icon,// 雪糕花
                 R.drawable.ice_decorate_2_icon,// 巧克力
@@ -88,15 +91,13 @@ public class IceStyleAdapter extends RecyclerView.Adapter<IceStyleHolder> {
         ivStylePic.setOnClickListener(v -> {
             bwEffect.setVisibility(View.VISIBLE);
             bwEffect.activite();// 显示气泡
-            ivStylePic.postDelayed(() -> {
-                // 选中并刷新
-                for (int i1 = 0; i1 < styleBeans.size(); i1++) {
-                    styleBeans.get(i1).setSelected(i1 == i);
-                }
-                notifys();
-                ClickStyelItemNext(i);
-                bwEffect.setVisibility(View.GONE);
-            }, 200);
+            // 选中并刷新
+            for (int i1 = 0; i1 < styleBeans.size(); i1++) {
+                styleBeans.get(i1).setSelected(i1 == i);
+            }
+            notifys();
+            ClickStyelItemNext(i);
+            new Handler().postDelayed(() -> bwEffect.setVisibility(View.GONE), 700);
         });
     }
 

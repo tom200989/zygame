@@ -19,6 +19,7 @@ import java.util.List;
 /*
  * Created by Administrator on 2020/10/019.
  */
+@SuppressWarnings(value = {"unchecked", "deprecation"})
 public class IceWork2Adapter extends RecyclerView.Adapter<IceWork2Holder> {
 
     private Context context;
@@ -58,8 +59,12 @@ public class IceWork2Adapter extends RecyclerView.Adapter<IceWork2Holder> {
         // 点击
         ivFoodPic.setOnClickListener(v -> {
             bwEffect.setVisibility(View.VISIBLE);// 显示特效
-            bwEffect.activite();// 播放
-            ivFoodPic.postDelayed(() -> ivFoodPic.setVisibility(View.GONE), 700);// 隐藏当前图片
+            bwEffect.activite();// 播放气泡
+            ClickOrderItemNext();// 回调
+            ivFoodPic.postDelayed(() -> {
+                ivFoodPic.setVisibility(View.GONE);
+                bwEffect.setVisibility(View.GONE);
+            }, 700);// 隐藏当前图片
             count++;
         });
     }
@@ -80,4 +85,25 @@ public class IceWork2Adapter extends RecyclerView.Adapter<IceWork2Holder> {
         }
         return false;
     }
+
+    // ---------------- 监听器 [ClickOrderItem] ----------------
+    private OnClickOrderItemListener onClickOrderItemListener;
+
+    // Interface--> 接口: OnClickOrderItemListener
+    public interface OnClickOrderItemListener {
+        void ClickOrderItem();
+    }
+
+    // 对外方式: setOnClickOrderItemListener
+    public void setOnClickOrderItemListener(OnClickOrderItemListener onClickOrderItemListener) {
+        this.onClickOrderItemListener = onClickOrderItemListener;
+    }
+
+    // 封装方法: ClickOrderItemNext
+    private void ClickOrderItemNext() {
+        if (onClickOrderItemListener != null) {
+            onClickOrderItemListener.ClickOrderItem();
+        }
+    }
+
 }
