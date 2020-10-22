@@ -107,8 +107,8 @@ public class FishWidget extends ImageView {
      * 随机生成分数
      */
     private int getRandomGoal() {
-        // 最小100, 最大200
-        return new Random().nextInt(150) + 100;
+        // 随机生成分数
+        return new Random().nextInt(20) + 20;
     }
 
     public enum DirectEnum {

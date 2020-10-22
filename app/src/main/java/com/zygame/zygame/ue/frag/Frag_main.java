@@ -74,24 +74,25 @@ public class Frag_main extends RootFrag {
         ivMainSetting.setOnClickListener(v -> toFrag(getClass(), Frag_setting.class, null, true));
         // 跳转到FISH
         ivMainFish.setOnClickListener(v -> {
-            // 防沉迷: 当时长大于12小时: 每日清零
-            if (PreventHelper.getCurrentTime() - PreventHelper.getLastRecordTime() > PREVENT_CLEAR_TIME) {
-                PreventHelper.setTotalDuration(0);
-            }
-
-            // 防沉迷: 防沉迷进入判断
-            long totalDuration = PreventHelper.getTotalDuration();// 获取一共玩了多久
-            long totalPermitPlayDuration = PreventHelper.getTotalPermitDuration();// 获取一共允许玩多久
-            if (totalDuration >= totalPermitPlayDuration) {// 如果当天超时了 - 提示
-                toast(R.string.common_app_setting_tip2, 6000);
-
-            } else {// 当天没有超时 - 则再判断单次是否超时
-                toFragModule(getClass(), RootComponent.FISH_AC, RootComponent.FRAG_FISH, null, true);
-            }
-            // toFragModule(getClass(), RootComponent.FISH_AC, RootComponent.FRAG_FISH, null, true);
+            // TODO: 2020/10/022  反沉迷暂时不开
+            // // 防沉迷: 当时长大于12小时: 每日清零
+            // if (PreventHelper.getCurrentTime() - PreventHelper.getLastRecordTime() > PREVENT_CLEAR_TIME) {
+            //     PreventHelper.setTotalDuration(0);
+            // }
+            //
+            // // 防沉迷: 防沉迷进入判断
+            // long totalDuration = PreventHelper.getTotalDuration();// 获取一共玩了多久
+            // long totalPermitPlayDuration = PreventHelper.getTotalPermitDuration();// 获取一共允许玩多久
+            // if (totalDuration >= totalPermitPlayDuration) {// 如果当天超时了 - 提示
+            //     toast(R.string.common_app_setting_tip2, 6000);
+            //
+            // } else {// 当天没有超时 - 则再判断单次是否超时
+            //     toFragModule(getClass(), RootComponent.FISH_AC, RootComponent.FRAG_FISH, null, true);
+            // }
+            toFragModule(getClass(), RootComponent.FISH_AC, RootComponent.FRAG_FISH, null, true);
         });
         // 跳转到ICE
-        ivMainIce.setOnClickListener(v -> toFragModule(getClass(), RootComponent.ICE_AC, RootComponent.FRAG_ICE_STYLE, null, true));
+        ivMainIce.setOnClickListener(v -> toFragModule(getClass(), RootComponent.ICE_AC, RootComponent.FRAG_ICE, null, true));
     }
 
     @Override
