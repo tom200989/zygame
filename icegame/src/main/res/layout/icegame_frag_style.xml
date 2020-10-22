@@ -15,6 +15,7 @@
 
     <!-- 雪糕容器 -->
     <com.hiber.tools.layout.PercentRelativeLayout
+        android:id="@+id/rl_ice_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -91,6 +92,17 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
+        app:layout_widthPercent="25%w" />
+
+    <!-- 截图 -->
+    <ImageView
+        android:id="@+id/iv_ice_screenshot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        app:layout_heightPercent="45%w"
         app:layout_widthPercent="25%w" />
 
 </com.hiber.tools.layout.PercentRelativeLayout>

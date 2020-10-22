@@ -233,12 +233,10 @@ public class Frag_fish extends RootFrag {
      */
     private void stopvoice() {
         if (bgVoice != null) {
-            bgVoice.reset();
             bgVoice.release();
             bgVoice = null;
         }
         if (fishVoice != null) {
-            fishVoice.reset();
             fishVoice.release();
             fishVoice = null;
         }

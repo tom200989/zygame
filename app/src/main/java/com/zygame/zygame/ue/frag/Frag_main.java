@@ -91,7 +91,7 @@ public class Frag_main extends RootFrag {
             // toFragModule(getClass(), RootComponent.FISH_AC, RootComponent.FRAG_FISH, null, true);
         });
         // 跳转到ICE
-        ivMainIce.setOnClickListener(v -> toFragModule(getClass(), RootComponent.ICE_AC, RootComponent.FRAG_ICE, null, true));
+        ivMainIce.setOnClickListener(v -> toFragModule(getClass(), RootComponent.ICE_AC, RootComponent.FRAG_ICE_STYLE, null, true));
     }
 
     @Override
